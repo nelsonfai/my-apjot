@@ -1,0 +1,60 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apjot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Source+Sans+Pro:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+   
+</head>
+<body>
+    <div id="circle"> </div> <!--   follows mouse-->
+    <nav>
+        
+
+        <div class="logo"> <a href="{% url 'homepage'%}">  Apjot</a> </div>
+            <div class="navlinks"> 
+                
+                <a href="{% url 'homepage'%}"> Home</a>
+                <a id="pod" href="{% url 'podcastHome'%}">Podcast</a>
+                <a id="blog" href="{% url 'blogHome'%}">Blog</a>
+                <a href="">About</a>
+                <a href="#">Contact</a>
+                
+                
+                
+                    <a id="user" href="{% url 'login'%}">LogIn</a>
+                    <a id="user" href="{% url 'signup'%}">Sign Up</a>
+                 
+               
+        </div>  <div class="authen"> 
+            <form action="{% url 'logout'%}" class="logout" method="post" display="hidden">
+                {% csrf_token %}
+                <button type="submit" id="logoutBtn">logout</button>
+            </form>
+             
+            <p> <img src="../media/profile-user.png" alt="profile" class="user">    {{user.username}}</p>  </div>     
+                
+                   
+               
+    </nav>
+    
+    <hr>
+    <div class="wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+    section
+
+    <script  type="text/javascript" src="{% static 'style.js' %}"></script>
+
+
+
+    <footer>
+         footer content
+    </footer>
+</body>
+</html>

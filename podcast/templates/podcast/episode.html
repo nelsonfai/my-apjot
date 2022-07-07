@@ -1,0 +1,242 @@
+{% extends 'main\base_layout.html' %}
+{% block content %}
+
+<article>  
+    
+    
+    <div class="article" style="width: 90%;"> 
+        <div class="article_image"  >
+        <div> <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/{{episode.spotifylink}}?utm_source=generator" width="100%" height="232" frameBorder="0" allowfullscreen="allowfullscreen" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        </div>
+         </div>
+       
+        <div class="article_element" >
+            <h2><a href="{% url 'episode' slug=episode.slug %}" > {{episode.title}}</a></h2><br>
+            <p> {{ episode.date }} </p><br>
+            <p> {{ episode.description|safe }}  </p>
+            <br>
+    {% if user.is_authenticated %}
+
+            <form action="{% url 'like_podcast' slug=episode.slug %}" method="post">
+                {% csrf_token %}
+            <input type="hidden" name="episode_id" value="{{ episode.id }}" >   
+
+            {% if user not in episode.likes.all %}
+                <button type="submit"  style="background:transparent; border:none; color:transparent;"> <img src="../static/like.png" alt="image" width ="25px" > </button><strong> {{episode.likes.all.count}}</strong>
+            {% else %}
+                <button type="submit" style="background:transparent; border:none; color:transparent;"> <img src="../static/love.png" alt="image" width ="25px" > </button><strong> {{episode.likes.all.count}}</strong>
+
+            {% endif %}   
+            </form>
+    {% else %}
+            <button onclick= "Verify()"  style="background:transparent; border:none; color:transparent;">  <img src="../static/like.png" alt="image" width ="25px"> </button>
+
+            <p  style=" color:red;"><a href="{% url 'login'%}" id="likealert" style=" color:red;">  </a> </p>   
+{% endif %}
+
+           
+        
+             
+                
+        </div>
+        
+   
+
+
+    
+</article>
+
+<div class="page_nav">  
+
+    <p style="text-align:left; display: inline; color:red">       
+        {% if prevpost %} 
+        <a href="{{ prevpost.slug}}" class="detail_nav">&laquo; {{prevpost.title}}</a>
+         {% else %}
+         <a href="{% url 'podcastHome'%}" class="detail_nav"> &laquo;  All Episodes</a>
+        {% endif %}
+        </p>
+        
+        
+        <p style=" float:right; display: inline;" > 
+        {% if nextpost %}
+        <a href="{{ nextpost.slug}}" class="detail_nav"> {{nextpost.title}} &raquo;</a>
+         {% else %}
+         <a href="{% url 'podcastHome'%}" class="detail_nav">All Episodes &raquo;</a>
+        {% endif %}
+        
+</div>
+
+</div>
+<br> 
+<div class="comment">  
+    <h4 class="comments"> Comments ({{ episode.podcomments.all.count }})  </h4><br>
+    {% for comment in comments %}
+    <p id="comment_name"><img src="../media/profile-user.png" alt="profile" class="user" > 
+      
+    {{ comment.author|title }}  </p> 
+       <p class="comment_date"> {{ comment.date }}</p> 
+       
+    <p id="comment_text"> {{ comment.comment }}</p>
+    
+    <br>
+
+    {% endfor %}
+  
+   <form action="{% url 'episode' slug=episode.slug %}" method="post">
+       {% csrf_token %}
+
+       {{ comment_form.as_p }}
+       <input type="submit" value="send"  class="btn41-43 btn-43">
+
+   </form>
+
+</div>
+
+
+
+
+<style>
+.recent_posts{
+    display: none;
+}
+.page_nav{
+    width:85%;
+    margin: auto;
+    
+    margin-top: 10px;
+    margin-bottom: 7%;
+}   
+.detail_nav{
+    color:rgb(16, 63, 63);
+}
+.article{
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    
+    border: 1px solid grey;
+    font-family: 'Open Sans', sans-serif;
+   
+    
+   
+    
+
+      
+}
+.article_element{
+    width:50%;
+    margin-left:10px;
+    padding:5%;
+    
+}
+.article_image {
+
+    width:50%;
+    height:inherit;
+    align-items:center;
+
+}
+
+
+.article_image img{ 
+
+ align-items: center;
+ margin-top: 50px;
+    margin-left: 10px;
+}
+
+.section_title{
+    font-size: 18px;
+    width: 180px;
+    padding:10px;
+    text-align: center;
+    letter-spacing: 6px;
+   border: 1px solid grey;
+   
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    margin-left: 10px;
+}    
+
+#search_btn{
+    margin-bottom: -10px;
+}
+.search{
+    float:right;
+    margin-top:10px
+}
+.search input{
+    padding: 1px;
+}
+.comment_date{
+    color:grey;
+    font-size: 10px;
+    margin-left: 15px;
+
+}
+#comment_text{
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+.name_field{
+    width: 100%;
+    padding:2%;
+    margin-bottom:2%;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px;
+    
+}
+.comment_name{
+    font-size: 13;
+
+}
+.comment_field{
+    width: 100%;
+    padding:2%;
+    margin-bottom:2%;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px;  
+    height: 40px;
+}
+.comment{
+    width: 60%;
+    margin-left: 10%;
+   padding: auto;
+   font-family: 'Open Sans', sans-serif;
+    
+}
+
+@media  screen and (max-width: 900px) {
+
+  .article{
+    display: block;
+  }
+}
+.article_element{
+    width:80%;
+    margin:auto;
+    padding:5%
+}
+.article_image{
+
+    width:80%;
+      
+
+}
+.article_image div{
+
+
+margin: 15% 0% 0% 5%;
+
+}
+button#readmore{
+    display: block;
+    margin: auto;
+}
+
+</style>
+
+
+{% endblock %}

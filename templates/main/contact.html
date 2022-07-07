@@ -1,0 +1,191 @@
+{% extends 'main\base_layout.html' %}
+{% block content %}
+
+<h1 class="page_title">Contact</h1>
+<div class="icon_container"> 
+             <div class="icondiv">  <img src="https://img.icons8.com/ios-filled/100/undefined/envelope-dots.png"  class="icon"/>
+           <
+            </div>
+             <div class="icondiv"> <img src="https://img.icons8.com/ios-filled/100/undefined/apple-phone.png"  class="icon"/>
+            
+            </div>
+            
+             <div class="icondiv" > <img src="https://img.icons8.com/ios-glyphs/120/undefined/instagram-new.png " class="icon" />
+            
+            </div>
+             <div class="icondiv"> <img src="https://img.icons8.com/ios-filled/100/undefined/address--v1.png"  class="icon"/> 
+            
+            </div>
+</div>      
+
+
+
+
+<section id="contact" class="contact" >
+    
+    <div class="contact-container">
+         <div class="contact-form"> 
+             
+             <form  method ="post"   action="{% url 'contactprocess' %}" onsubmit="myFunction()">
+             {% csrf_token %}
+             
+                     <input type="text" id="name" name="fname" required="required" placeholder="Full name"><br>
+                     
+                     <input type="email" id="email" name="email" required="required" placeholder="Email"><br>
+                     <input type="text" id="subject" name="subject" required="required" placeholder="Subject"><br>
+                 
+                     <textarea  name="message" id="msg"  rows="6" placeholder="Message"></textarea><br>
+                     <br>
+                     
+                     <input  id ="btn" type="submit" value="Submit" >
+                     
+                     <script > function myFunction() {
+ 
+                         alert('Your message has been sent 📨') ; }     
+                         
+                            
+                         
+                     </script> 
+           </form>
+           
+          
+             
+         
+
+         </div> 
+
+         <div class="contact-info-box ">
+               
+           <!--  SIDE INFO BOX-->
+          
+         </div>
+        
+         
+     </div>  
+ </section>
+
+<style> 
+.page_title{
+    
+    text-align: center;
+    padding: 5%;
+    margin-bottom: 10px;
+    font-size: 50px;
+    
+
+    
+}
+    .recent_posts{
+        display:none;
+}
+
+
+.icon{
+    width:50%
+}
+
+.icondiv{
+    width:15%;
+    margin:auto;
+
+}
+.icon_container{
+    width:
+    70%;
+    display:flex;
+    margin: auto;
+}
+
+
+
+
+
+    
+.contact{
+    width:80%;
+    margin:10% 10% 10% 10%; }    
+
+.contact-container{
+    align-items:flex-start;  
+    display:flex;
+    width: 80%;
+    margin:auto;
+    
+    box-shadow: 2px -1px 10px rgb(252, 200, 163,0.4);
+   
+   
+}
+
+
+.contact-info-box{
+    
+    margin-top: 5%;
+    margin-bottom: 4px;
+    text-align:justify;
+    font-size: 16px;
+    color:black ;
+    padding-left:3%;
+    padding-right: 3%;
+    font-family: 'Opens sans', sans-serif;
+   
+    
+}
+
+
+.contact-form{
+    width:100%;
+    padding:10%;
+    
+    
+    
+    
+    
+}
+
+.contact-form input{
+    margin-bottom: 6%;
+    padding: 3%;
+    width:90%;
+    border-radius: 15px;
+    border: none;
+    border:.2px solid grey ;
+    background: color #f9f9f9;
+    font-family: 'Poppins', sans-serif
+    
+}
+#btn{
+    display: block;
+    background-color:black;
+    border:none;
+    border-radius: 2px;
+    
+    font-family: 'Montserrat', sans-serif; 
+    color:white;
+    width:100px;
+    height: auto;
+    margin: auto;
+    
+
+}
+
+#btn:hover{
+    border: 1px solid black;
+    font-size:smaller;
+    background-color: white;
+    color:black
+}
+.contact-form textarea{
+    width:90%;
+    padding:3%;
+    box-sizing: border-box;
+    background-color: #fefefe;
+    font-family: 'Open sans', sans-serif
+
+
+}
+
+
+
+</style>
+    
+    {% endblock %}

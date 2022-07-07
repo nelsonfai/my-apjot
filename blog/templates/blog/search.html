@@ -1,0 +1,57 @@
+{% extends 'main\base_layout.html' %}
+{% block content %}
+
+{%if searched%}
+
+<h1 style="text-align: center;"> Your search result for {{ searched }}</h1>
+<br>
+
+
+
+<p style="text-align: center; color:grey;">{{results.count}} result found</p>
+
+<br>
+
+
+
+
+
+
+
+
+{% for result in results %}
+<div class="article" > 
+    
+    <div class="article_image"  ><img src="{{ result.image.url }}" alt="article_image" width="40%"    "> </div>
+    <div class="article_element" >
+        <h2><a href="{% url 'details' courseid=result.slug %}" > {{result.title}}</a></h2><br>
+
+        <p> {{ result.snippet|safe}}  </p>
+        <br>
+         <a href="{% url 'details' courseid=result.slug %}"> <button class="readmore">Read More</button> </a> <br>
+
+</div>
+
+</div>
+{% endfor %}
+
+
+{% else %}
+<p> you forgot to search</p>
+{% endif %}
+
+<style>
+    .article{
+        display: flex;
+        margin: auto;
+        width:70%;
+        border-bottom:1px solid black;
+        margin-bottom: 5px;
+        padding: 2%;
+    }
+    .article_element{
+        width:50%;
+    }
+    
+</style>
+{% endblock %}

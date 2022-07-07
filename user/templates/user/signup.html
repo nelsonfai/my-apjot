@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Apjot</title>
+</head>
+<body>
+      
+		<div class="login-content">
+            <h1 id="pagehead"> SignUp <br> <img src="/static/avatar.svg" width ='20%' id="avatar"></h1>
+           
+			<form action="/user/signup/" class="site-form" method="post">
+                {%csrf_token%}
+				
+				
+           		   		<p> <span><img src="https://img.icons8.com/ios-glyphs/15/undefined/user--v1.png"  /> </span> {{form.username.label}} </p>  <p>{{ form.username}}</p>
+                        <p> <span><img src="https://img.icons8.com/material-outlined/16/undefined/email.png"  /> </span>  E-mail  </p>  <p>{{ form.email}} </p>
+                        <p> <span><img src="https://img.icons8.com/material-rounded/14/undefined/password.png"  /> </span> {{form.password1.label}}</p>  <p>{{ form.password1 }}</p>
+                        <p> <span><img src="https://img.icons8.com/material-rounded/14/undefined/password.png"  /> </span> {{form.password2.label}}</p>  <p>{{ form.password2 }} </p>
+                        
+
+                 <br>
+
+            	<p style="margin:auto ;"><input type="submit" class="btnsubmit" value="SignUp"><a href="{% url 'login'%}"  class="btnsubmit"  style="font-size: 10px ;"> LogIn</a></p>
+            </form>
+           
+        </div>
+    
+        {{ form.errors }}
+    
+
+
+
+<style> 
+p{
+    font-weight: bold;
+    font-size: .83em;
+    margin-bottom: 5px;
+}
+
+h5 ,span{
+    display: inline-block;
+    margin:0;
+}
+.login-content{
+       
+   box-shadow: 1px -0px  1px 2px  rgba(0, 0, 0, .2);
+   padding:2%;
+
+    font-family: 'Open Sans', sans-serif;
+    width:20%;
+    margin: auto;
+    margin-top: 5%;
+    
+    border-radius:8px;
+    
+}
+
+.btnsubmit{
+    display: block;
+    margin: auto;
+   
+   background-color: white; 
+ color: #F9A826; 
+ border: 2px solid #F9A826;
+ 
+ 
+ padding: 2% 3%;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ 
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+ 
+ 
+ 
+}
+.btnsubmit:hover {
+ background-color: #F9A826;
+ color: white;
+ transition-duration: 1s;
+}
+#pagehead{
+    text-align: center;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    
+}
+
+.field{
+    font-family: 'Open Sans', sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+   
+    
+   
+}
+@media  screen and (max-width: 900px) {
+ 
+
+.login-content{
+    width:70%;
+    padding-left:5% ;
+    
+    
+    
+}
+.login-content #avatar {
+    display: block;
+    margin:auto
+}
+}
+
+
+
+</style>
+</body>
+</html>

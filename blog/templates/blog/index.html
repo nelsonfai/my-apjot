@@ -1,0 +1,184 @@
+{% extends 'main\base_layout.html' %}
+{% block content %}
+<div class="blogcontainer">
+    <form class="search" action="{% url 'search' %}" method="post">
+{% csrf_token %}
+        <input type="text" placeholder="search.." name="search_input" ">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+<h1 class="page_title">Blog</h1>
+<p class="section_title">Recent post</p>
+<article>  
+
+    {% for article in paginated_article %}
+    <div class="article" style="width: 100%;"> 
+        <div class="article_image"  ><img src="{{ article.image.url }}" alt="article_image" width="100%"    "> </div>
+        <div class="article_element" >
+            <h2><a href="{% url 'details' courseid=article.slug %}" > {{article.title}}</a></h2><br>
+            <p> {{ article.date }} </p><br>
+            <p> {{ article.snippet|safe}}  </p>
+            <br>
+             <a href="{% url 'details' courseid=article.slug %}"> <button id="readmore">Read More</button> </a> <br>
+         </div>
+        
+        
+        
+    </div>
+    <br>
+    
+            {% endfor %}
+    
+</article>
+ <p style="text-align:center;"> Page  {{ paginated_article.number }} of  {{ paginated_article.paginator.num_pages }} </p>  
+<br>
+<br>
+{% if paginated_article.has_previous %}
+        <p style="float:left;"> 
+                <a href="?page=1"> &laquo; First </a>
+                <a href="?page={{paginated_article.previous_page_number}}"> --Previous</a>
+        </p >
+        
+{% endif %}
+
+{% if paginated_article.has_next %}
+        <p style=" float:right;" >
+
+            <a href="?page={{ paginated_article.next_page_number }}" >Next <span> &raquo; </span> </a>
+            
+            
+            
+        </p>
+
+{% endif%}
+</div>
+<style > 
+.related_articles{
+   display: none; 
+}
+.blogcontainer{
+    width:60%;
+    margin:auto ;
+    position: relative;
+}
+.page_title{
+    
+    text-align: center;
+    padding: 5%;
+    margin-bottom: 10px;
+    font-size: 50px;
+
+    
+}
+article{
+    padding-top: 3%;
+
+   
+}
+.article{
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+   
+    border: 1px solid grey;
+    font-family: 'Open Sans', sans-serif;
+   
+    
+   
+    
+
+      
+}
+.article_element{
+    width:50%;
+    margin-left:10px;
+    padding:5%
+}
+.article_image{
+
+    width:50%;
+    height:inherit;
+
+}
+.article_image img{ 
+
+ align-items: center;
+ margin-top: 50px;
+    margin-left: 10px;
+}
+
+.section_title{
+    font-size: 18px;
+    width: 180px;
+    padding:10px;
+    text-align: center;
+    letter-spacing: 6px;
+   border: 1px solid grey;
+   
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    margin-left: 10px;
+}    
+button#readmore{
+   
+    background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  
+  
+  padding: 4%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+  
+  
+}
+button#readmore:hover {
+  background-color: #008CBA;
+  color: white;
+  transition-duration: 1s;
+}
+#search_btn{
+    margin-bottom: -10px;
+}
+.search{
+    float:right;
+    margin-top:10px
+}
+.search input{
+    padding: 1px;
+}
+@media  screen and (max-width: 700px) {
+.article{
+    display: block;
+    width:90%;
+    margin:auto;
+  
+}
+.article_element{
+    width:95%;
+    
+}
+.article_image{
+
+    width:60%;
+    
+
+}
+.blogcontainer{
+    width: 95%;
+    margin: auto;
+}
+.search{
+    display: none;
+}
+
+
+}
+</style>
+{% endblock %}

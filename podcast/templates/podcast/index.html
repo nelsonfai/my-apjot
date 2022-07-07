@@ -1,0 +1,210 @@
+{% extends 'main\base_layout.html' %}
+{% block content %}
+<div class="blogcontainer">
+    <form class="search" action="{% url 'podcastsearch' %}" method="post">
+{% csrf_token %}
+        <input type="text" placeholder="search podcast" name="search_input" >
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+<h1 class="page_title">Podcast</h1>
+<p class="section_title current_episode">Current Episode</p>
+   <article>  
+    
+    
+    <div class="article" style="width: 100%;"> 
+        <div class="article_image"  ><img src="{{ first_episode.image.url }}" alt="article_image" width="100%" > </div>
+        <div class="article_element" >
+            <h2><a href="{% url 'episode' slug=first_episode.slug %}" > {{first_episode.title}}</a></h2><br>
+            <p> {{ first_episode.date }} </p><br>
+            <p> {{ first_episode.snippet|safe }}  </p>
+            <br>
+             <a href="{% url 'episode' slug=first_episode.slug %}"> <button id="readmore">Listen <span> &#x25B6</span> </button> </a> <br>
+         </div>
+        
+   
+        
+    </div>
+    <br> 
+</article>
+
+
+
+
+
+
+</div>
+
+<section class="recent_pod"> 
+    
+      
+
+    <div class="episode_container" >
+        <h3 class="section_title" style="position: relative; background-color: #008CBA;"> Episodes </h3>  
+        {% for episode in episodes %}
+        <div class="episode_element"> 
+              
+            <div class="img">
+                <figure>
+                    <a href="{% url 'episode' slug=first_episode.slug %}"> <img src="{{ episode.image.url }}" width="100%" alt=""> </a><!--  image must be square image 300px-->
+                   
+                </figure>
+            </div>
+            <div  class="episode_info">
+                <a href="{% url 'episode' slug=episode.slug %}"><h3 style=" margin-bottom:7%;"> {{episode.title}}</h3 ></a>
+
+                <p style=" margin-bottom:10%;">  {{ episode.snippet|safe}} </p><br>
+                <p> <a href="{% url 'episode' slug=episode.slug %}"> <button id="readmore">Listen <span>&#x25B6</span> </button> </a> <br></p>
+            </div>
+               
+         </div>
+         <hr>
+
+         {% endfor %}
+         
+    </div>
+</section>
+
+<style > 
+.recent_posts{
+    display: none;  
+    
+}
+
+.episode_info{
+    width:60%
+}
+.img{
+    width:40%;
+    margin-right:4%
+}
+.episode_element{
+    display:flex;
+    width:80%;
+   margin-left:5%;
+    margin-top: 5%;
+    justify-content: space-around;
+}
+.episode_container{
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+   width: 50%;
+    margin:auto;
+    
+}
+
+.blogcontainer{
+    width:70%;
+    margin:auto ;
+    position: relative;
+}
+.page_title{
+    
+    text-align: center;
+    padding: 5%;
+    margin-bottom: 10px;
+    font-size: 50px;
+
+    
+}
+article{
+    padding-top: 3%;
+
+   
+}
+.article{
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    
+    border: 1px solid grey;
+    font-family: 'Open Sans', sans-serif;
+ 
+}
+
+.article_element{
+    width:50%;
+    margin-left:10px;
+    padding:5%
+}
+.article_image{
+
+    width:50%;
+    height:inherit;
+    margin-bottom: 2%;
+
+}
+.article_image img{ 
+
+ align-items: center;
+ margin-top: 50px;
+    margin-left: 10px;
+}
+
+.section_title{
+    font-size: 18px;
+    width: 180px;
+    padding:10px;
+    text-align: center;
+    letter-spacing: 6px;
+   border: 1px solid grey;
+   
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    margin-left: 10px;
+}    
+
+#search_btn{
+    margin-bottom: -10px;
+}
+.search{
+    float:right;
+    margin-top:10px
+}
+.search input{
+    padding: 1px;
+}
+
+
+@media  screen and (max-width: 700px) {
+
+.article{
+
+display: block;
+width: 100%;
+border: none;
+ } 
+ .blogcontainer{
+    width:95%;
+    margin:auto ;
+    position: relative;  
+}
+.article_element{
+    width:80%;
+    padding:0;
+}
+.article_image{
+    width: 60%;
+    margin: auto;
+} 
+.search{
+    display: none;}
+
+.page_title{
+    padding-bottom:0;
+}
+.episode_container{
+  
+   width: 90%;
+    margin:auto;
+    
+}
+.current_episode{
+    display: none;
+}
+}
+
+
+</style>
+
+{% endblock %}

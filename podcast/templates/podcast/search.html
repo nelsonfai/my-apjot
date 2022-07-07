@@ -1,0 +1,34 @@
+{% extends 'main\base_layout.html' %}
+{% block content %}
+{%if searched%}
+
+<h1> Your search result for {{ searched }}</h1>
+<br>
+
+
+
+<p> result found</p>
+
+<br>
+
+{{results }}
+
+{% for result in results %}
+
+
+
+<a href="{% url 'episode' slug=result.slug %}">
+{{ result.title }}
+<br>
+{{ result.snippet|safe }}
+<br>
+<br>
+</a>
+
+{% endfor %}
+{% else %}
+<p>No input</p>
+{% endif %}
+
+
+{% endblock%}

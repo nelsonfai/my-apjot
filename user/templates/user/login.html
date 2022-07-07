@@ -1,0 +1,144 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Apjot</title>
+</head>
+<body>
+
+    
+
+    <div class="container">
+        
+		<h1 id="pagehead"> login <br><img src="/static/avatar.svg" width ='20%' id="avatar"></h1>
+		<div class="login-content">
+			<form action="{% url 'login'%}" class="site-form" method="post">
+                {%csrf_token%}
+				
+				
+                <div class="input-div one">
+                   
+           		   <div class="div">
+           		   		<h5><span><img src="https://img.icons8.com/ios-glyphs/15/undefined/user--v1.png"  /> </span>{{ form.username.label }} </h5>
+                        {{ form.username}}
+           		   		
+           		   </div>
+                      
+           		
+           		   <div class="div">
+           		    	
+                        <h5> <span> <img src="https://img.icons8.com/material-rounded/14/undefined/password.png"/></span>{{form.password.label }}</h5>
+           		    	{{ form.password }}
+            	   </div>
+<br>
+<br>
+                   
+            	</div>
+            	
+               
+
+            	<p> <input type="submit" class="btnsubmit" value="LogIn" > <a href="{% url 'signup'%}"  class="btnsubmit"  style="font-size: 10px ;"> SignUp</a></p>
+            </form>
+     
+            <div class="errors"  style="color:red ; font-size: 14px; margin-left: -8%; width: 90%;"><p > {{ form.errors }} </p> </div>   </div>
+   
+
+
+
+<style> 
+
+.container{
+    font-family: 'Open Sans', sans-serif;
+    width:25%;
+    border-radius:8px;
+
+    margin:auto;
+    margin-top: 5%;
+   box-shadow: 1px -0px  1px 2px  rgba(0, 0, 0, .2);
+   padding:0.5% 0% 3% 0%
+
+
+}
+
+    
+
+.login-content{
+    width:30%;
+    margin: auto;
+}
+
+.btnsubmit{
+    display: block;
+    margin: auto;
+   
+   background-color: white; 
+ color: #F9A826; 
+ border: 2px solid #F9A826;
+ 
+ font-size  :12px; 
+ padding: 2% 3%;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ 
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+ 
+ 
+ 
+}
+.btnsubmit:hover {
+ background-color: #F9A826;
+ color: white;
+ transition-duration: 1s;
+}
+#pagehead{
+    text-align: center;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    
+}
+@media  screen and (max-width: 900px) {
+.container{
+    width:90%;
+
+    
+}
+
+    
+}
+.login-content{
+    width:50%;
+    margin-left: 20%;
+    
+    
+}
+.login-content #avatar {
+    margin-left: 15%;
+}
+
+
+.field{
+    font-family: 'Open Sans', sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    
+   
+}
+@media  screen and (max-width: 500px) {
+.container{
+    width:100%;
+    
+}
+}
+
+</style>
+</body>
+</html>

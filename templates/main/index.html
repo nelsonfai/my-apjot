@@ -1,0 +1,328 @@
+{% extends 'main\base_layout.html' %}
+ 
+
+{%block content%}
+    <section class ="hero" > 
+        <div class="hero-text "  onmouseover="pointLarge()" onmouseout="pointNormal()"><p id="head"> A Public Journal of Thoughts</p>
+            <p  id="tag"> Lorem, ipsum Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet. co. dolor sit amet usto de background </p>
+        </div>
+         
+        
+           <a href="{% url 'signup'%}"><button  > Join us today! </button></a> 
+
+        <div class="apjotcontainer">
+                 <div id="a" class ="apjot">A</div>
+                 <div id="p" class ="apjot">P</div>
+                 <div id="j" class ="apjot">J</div>
+                 <div id="o" class ="apjot">O</div>
+                 <div id="t" class ="apjot">T</div>
+         </div>
+
+    </section>
+    <br>
+    <br>
+
+    <section class ="description_container"> 
+        <div class="one_left  fadeleft"   > 
+            <h2> So ... </h2>
+            
+            <span> &#x2198;</span>
+        </div >
+
+        <div class="two_right faderight" ><h3> Lorem ipsum dolor sit amet, consectetur adipisicing Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, aspernatur. Rerum, maiores.</h3><br>
+           
+           <span> &#x2199;</span>
+        </div>
+
+        <div class="threeleft  fadeleft"  > 
+            <h3> OR .. Lorem, ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, commodi! </h3>
+            
+            <span> &#x2198;</span>
+        </div >
+
+        <div class="four_right faderight" ><h3> Lorem ipsum dolor sit amet, consectetur adipisicing Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, aspernatur. Rerum, </h3>
+            
+            <div class="center"> <span>&#11174; </span></div>
+         </div>
+
+       
+
+    
+         
+         <div class="five_center fadeforward sectionDiv"> <h3> Well that's just  a thought!</h3>
+            
+         </div>
+     </section>
+     
+            
+     </div>
+     
+<style>
+.recent_posts{
+        display:none
+    }
+.hero{
+    width:90%;
+    margin:auto;
+    
+}
+
+.hero #head{
+    text-align: center;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 70px;
+    margin:2%;
+    height:auto;
+    animation-name: fade_left;
+    animation-duration: 3s;
+   
+
+}
+.hero #tag {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    width:50%;
+    margin:auto;
+   
+    
+    
+    
+}   
+.hero{
+  
+    
+    
+    background-repeat: repeat;
+    
+    
+    
+    background-size: 1500px 900px;
+    background-repeat: no-repeat;
+    
+}
+.hero-text{
+    margin-bottom: 90px;
+    
+}
+ a button {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 1%;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin:auto;
+    cursor: pointer;
+  }
+ .apjotcontainer{
+     font-size:80px;
+     font-family: 'Kdam Thmor Pro', sans-serif;
+     display:flex;
+     
+     -webkit-text-fill-color: #ffffff;
+     -webkit-text-stroke: 1pt grey;
+     width: 90%;
+     margin: auto;
+     justify-content:space-between;
+     margin-top: 80px;
+    
+
+ }
+ .apjot{
+  border: 1px ridge grey;
+  width:100px;
+  text-align:center;
+
+ }
+ 
+ #a{
+    transform: rotate(37deg);
+    
+ }
+ #p{
+    transform: rotate(-34deg);
+    
+ }
+ #j{
+    transform: rotate(37deg);
+    
+ }
+ #o{
+    transform: rotate(-30deg);
+    
+ }
+ #t{
+    transform: rotate(-20deg);
+   
+ }
+
+ .description_container{
+     width:50%;
+     margin:auto;
+     margin-top: 5%;
+     font-family: 'Shadows Into Light', cursive;
+     letter-spacing: 0.0825em;
+     
+ }
+ .description_container div{
+   width: 100%;
+   margin-bottom: 7%;
+
+}
+.description_container div:hover{
+    transform: scale(1.1);
+}
+
+.center {
+    display: block;
+  text-align: center;
+}
+.two_right{
+    margin-left:auto;
+margin-right:0;
+text-align: right;
+}
+
+.four_right{
+margin-left:auto;
+margin-right:0;
+text-align:left;
+}
+
+.five_center{
+    margin:auto;
+    color:blueviolet;
+    padding-left: 20%;
+    font-size: 40px;
+}
+
+span{
+    font-size: 60px;
+    color:red;
+}
+
+.sectionDiv{
+    width: 80%;
+    margin: auto;
+}
+
+
+
+
+@media screen and (max-width:900px) {
+.hero{
+    width:100%;
+    margin:auto;
+    
+}
+
+.hero #head{
+    text-align: center;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 50px;
+    margin:2%;
+    margin-top: 10%;
+    height:auto;
+    animation-name: fade_left;
+    animation-duration: 3s;
+   
+
+}
+.hero #tag {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+    width:80%;
+    margin:auto;
+  
+}   
+
+.hero-text{
+    margin-bottom:12px;
+    
+}
+a button {
+   padding: 2%; 
+
+  }
+  .two_right{
+   
+margin:auto;
+text-align: right;
+}
+
+.four_right{
+margin:auto;
+
+text-align:left;
+}
+.five_center{
+    margin:auto;
+}
+.description_container{
+     width:70%;
+     margin:auto;
+     font-family: 'Shadows Into Light', cursive;
+     letter-spacing: 0.0825em;
+     font-size: smaller;
+     
+ }
+ .five_center{
+    margin:auto;
+    color:blueviolet;
+    padding-left: 8%;
+    font-size: 25px;
+}
+
+span{
+    font-size: 60px;
+    
+}
+
+}
+
+@keyframes fadesleft{
+    from{
+        transform: translateX(-40%) scale(0.9); 
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%) scale(1); 
+        opacity: 1;
+    }
+}
+
+@keyframes fadesright{
+    from{
+        transform: translateX(40%) scale(0.9); 
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%) scale(1); 
+        opacity: 1;
+    }
+}
+
+@keyframes fadesforward{
+    from{
+        transform:  scale(0.5); 
+        opacity: 0;
+    }
+    to{
+        transform: scale(1.5); 
+        opacity: 1;
+    }
+}
+
+
+
+</style>
+
+
+
+
+  {%endblock%}
+   

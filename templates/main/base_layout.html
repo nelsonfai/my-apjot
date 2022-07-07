@@ -1,0 +1,134 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apjot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+</head>
+    <body>
+            <div id="circle"> </div> <!--   follows mouse-->
+            <nav>
+                
+
+                <div class="logo"> <a href="{% url 'homepage'%}">  Apjot</a> </div>
+                <div class="navlinks" id="navlinks"> 
+                        
+                        <a href="{% url 'homepage'%}"> Home</a>
+                        <a id="pod" href="{% url 'podcastHome'%}">Podcast <img src="../media/2.svg" alt="" width="15px"> </a>
+                        <a id="blog" href="{% url 'blogHome'%}">Blog</a>
+                        <a href=" {% url 'about'%}">About</a>
+                        
+                        
+                        {% if not request.user.is_authenticated %}
+                        
+                        <a id="user" href="{% url 'login'%}">LogIn</a>
+                        
+                        <a id="user" href="{% url 'signup'%}">Sign Up</a>
+                    
+                        {% endif %}
+
+                        {% if request.user.is_authenticated %}
+                        <form action="{% url 'logout'%}" class="logout user2 " method="post" display="hidden">
+                            {% csrf_token %}
+                            <button type="submit" id="logoutBtn">logout</button>
+                        </form>
+                        
+                        <p class="user2"> <img src="../media/profile-user.png" alt="profile" class="user ">{{user.username}}</p>
+                        {% endif %} 
+                    
+                        
+                </div>
+                
+                    {% if request.user.is_authenticated %}
+                    <div class="authen">
+                
+                    
+                        <form action="{% url 'logout'%}" class="logout" method="post" display="hidden">
+                            {% csrf_token %}
+                            <button type="submit" id="logoutBtn">logout</button>
+                        </form>
+                        
+                        <p> <img src="../media/profile-user.png" alt="profile" class="user">{{user.username}}</p> 
+
+                    </div>     
+                    
+                    {% endif %}     
+                
+        
+                <div class="hamburger-lines" onclick="Toggle()">
+
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                </div> 
+                    
+                    
+                        
+                    
+            </nav>
+            
+            
+            <div class="wrapper">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+
+            
+
+
+
+            <section class="recent_posts" > 
+            
+                <h3 class="section_title" style="border:none ;position: relative; width: 300px;text-align: left;"> Related Articles </h3>    
+            
+                <div class="episode_container" >
+                    {% for article in articles%}
+                    <div class="episode_element"> 
+                
+                        <div class="img"><a href="{% url 'details' courseid=article.slug %} ">
+                            <figure>
+                                <img src="{{ article.image.url }}" width="100%" alt=""> <!--  image must be square image 300px-->
+                                
+                                <figcaption>  <a href="{% url 'details' courseid=article.slug %}"> {{article.title}}</a></figcaption>
+                            </figure>
+                        </div>
+                        
+                                
+                    </div>
+
+                    {% endfor %}
+                    
+                </div>
+                
+        </section>
+
+        <footer>
+                <br>
+                
+                <img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/undefined/external-up-arrows-dreamstale-lineal-dreamstale-3.png" onclick="topFunction()" id="myBtn" />
+                <script  type="text/javascript" src="{% static 'style.js' %}"></script>
+                <div class="navlinks"> 
+                        
+                    <a href="{% url 'homepage'%}"> Home</a>
+                    <a id="pod" href="{% url 'podcastHome'%}">Podcast <img src="../media/2.svg" alt="" width="15px"> </a>
+                    <a id="blog" href="{% url 'blogHome'%}">Blog</a>
+                    <a href=" {% url 'about'%}">About</a>
+                    <a href="{% url 'contact'%}">Contact</a>
+
+                
+                </div> 
+                
+        </footer>
+</body>
+</html>
+
+        
+        
