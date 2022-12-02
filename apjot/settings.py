@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-as&l9#gl@(wqa%^^h8t25n-+#t8zfa8^ow5cl(js9llayllcay
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my-apjot-production.up.railway.app']
+ALLOWED_HOSTS = ['https://my-apjot-production.up.railway.app']
 
 
 # Application definition
@@ -145,3 +145,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'fainelson855@gmail.com'
 EMAIL_HOST_PASSWORD = 'yeodnofweiirvltw'
 
+CSRF_TRUSTED_ORIGINS = ["https://my-apjot-production.up.railway.app"]
