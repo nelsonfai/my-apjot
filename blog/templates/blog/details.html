@@ -23,7 +23,11 @@
         <br>
         
         <div class="articleBody"> {{ article.body| safe}} </div>
-     
+          <form action="{% url 'like_article' courseid=article.slug %}" method="post" id="applaud">
+                    {% csrf_token %}
+                   <input type="hidden" name="article_id" value="{{ article.id }}" >   
+                 <button type="submit"  style="background:transparent; border:none; color:transparent;margin-block: 20px;"> <img src="../static/like.png" alt="image" width ="25px" style = "margin-bottom: -10px; margin-right: 10px;"> </button><strong id="applaudcount">{{article.applaud}}</strong>
+                </form>
         
 
 
