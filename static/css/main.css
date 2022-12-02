@@ -128,6 +128,7 @@ nav .navlinks{
     font-family: 'Shadows Into Light', cursive;
     letter-spacing: 2px;
     font-size: calc(1rem + 2vw);
+    display:block
 }
 
 .img{
