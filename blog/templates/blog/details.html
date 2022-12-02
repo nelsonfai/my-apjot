@@ -133,6 +133,7 @@
                 url: "{% url 'like_article' courseid=article.id %}",
                 data: $("#applaud").serialize(),
                 datatype: "json",
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                 success:function(data){
                     
                     applaudcount.innerText = data.applaudcount
