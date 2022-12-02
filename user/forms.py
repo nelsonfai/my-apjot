@@ -14,8 +14,8 @@ class CreateUserForm(UserCreationForm):
         
         widgets ={
             'username': forms.TextInput(attrs={'class':'field','placeholder':'Name',}),
-            'email':forms.TextInput(attrs={'class':'field','placeholder':'Email',}),
-            'password1':forms.PasswordInput(attrs={'class':'field','placeholder':'Name',}),
+            'email': forms.TextInput(attrs={'class':'field','placeholder':'Email',}),
+            'password1': forms.PasswordInput(attrs={'class':'field','placeholder':'Name',}),
             'password2': forms.PasswordInput(attrs={  'class':'field','placeholder':'Name',})
         }
 

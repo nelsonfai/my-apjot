@@ -7,178 +7,145 @@
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>
 <h1 class="page_title">Blog</h1>
-<p class="section_title">Recent post</p>
+<p class="recentPost">Recent post</p>
 <article>  
 
     {% for article in paginated_article %}
-    <div class="article" style="width: 100%;"> 
-        <div class="article_image"  ><img src="{{ article.image.url }}" alt="article_image" width="100%"    "> </div>
-        <div class="article_element" >
-            <h2><a href="{% url 'details' courseid=article.slug %}" > {{article.title}}</a></h2><br>
-            <p> {{ article.date }} </p><br>
-            <p> {{ article.snippet|safe}}  </p>
-            <br>
-             <a href="{% url 'details' courseid=article.slug %}"> <button id="readmore">Read More</button> </a> <br>
-         </div>
-        
-        
-        
-    </div>
-    <br>
-    
-            {% endfor %}
-    
+        <div class="article"> 
+            <div class="article_image"  style=" background: url('{{article.image.url}}');background-position:center;
+            background-size:cover; background-repeat: no-repeat;">
+            </div>
+            <div class="article_element" >
+                <h2><a href="{% url 'details' courseid=article.slug %}" > {{article.title}}</a></h2><br>
+                <p style="color: grey;"> {{ article.tagline }} </p>
+                <p> {{ article.snippet|safe}}  </p>
+                <br>
+                <a href="{% url 'details' courseid=article.slug %}"> <button id="readmore">Read More</button> </a> <br>
+            </div>      
+        </div>
+    {% endfor %}
 </article>
- <p style="text-align:center;"> Page  {{ paginated_article.number }} of  {{ paginated_article.paginator.num_pages }} </p>  
-<br>
-<br>
-{% if paginated_article.has_previous %}
-        <p style="float:left;"> 
-                <a href="?page=1"> &laquo; First </a>
-                <a href="?page={{paginated_article.previous_page_number}}"> --Previous</a>
-        </p >
-        
-{% endif %}
+<div class="paginationNav"> 
+    
+            <p style="text-align:center;"> Page  {{paginated_article.number}} of  {{ paginated_article.paginator.num_pages }} </p>  
+            {% if paginated_article.has_previous %}
+                    <span style="float:left;"> 
+                            <a href="?page=1"> &laquo; First </a>
+                            <a href="?page={{paginated_article.previous_page_number}}"> Previous</a>
+                    </span >    
+            {% endif %}
 
-{% if paginated_article.has_next %}
-        <p style=" float:right;" >
-
-            <a href="?page={{ paginated_article.next_page_number }}" >Next <span> &raquo; </span> </a>
-            
-            
-            
-        </p>
-
-{% endif%}
+            {% if paginated_article.has_next %}
+                    <span style=" float:right;" >
+                        <a href="?page={{ paginated_article.next_page_number }}" >Next <span> &raquo; </span> </a>
+                    </span>
+            {% endif%}
 </div>
+</div>
+
 <style > 
-.related_articles{
-   display: none; 
-}
-.blogcontainer{
-    width:60%;
-    margin:auto ;
-    position: relative;
-}
-.page_title{
-    
-    text-align: center;
-    padding: 5%;
-    margin-bottom: 10px;
-    font-size: 50px;
 
-    
-}
-article{
-    padding-top: 3%;
-
+    .blogcontainer{
+        width:90%;
+        max-width: 769px;
+        margin:auto ;
+        position: relative;
+    }
+    .page_title{
+        text-align: center;
+        padding: 5%;
+        margin-bottom: 10px;
+        font-size: calc(30px + 3vw);   
+    }
+    article{
+        padding-top: 3%;
+    }
+    .article{
+        margin:auto;
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid grey;
+        font-family: 'Open Sans', sans-serif; 
+        font-size: 1.18rem;    
+    }
+    .article p{
+        line-height: 1.6em;
+    }
+    .article_element{
+        width:50%;
+        margin-left:10px;
+        padding:5%
+    }
+    .article_image{
+        width:50%; 
+    }
    
-}
-.article{
-    margin:auto;
-    display: flex;
-    justify-content: space-between;
-   
-    border: 1px solid grey;
-    font-family: 'Open Sans', sans-serif;
+    .recentPost{
+        font-size:1.5em;
+        padding:10px;
+        text-align: center;
+        letter-spacing: 6px;
+    
+        position: absolute;
+        z-index: 2;
+        background-color: #f0f0f0;
+        margin-left: 10px;
+    }    
+    button#readmore{
+        background-color: black; 
+        color: white; 
+        padding:0.6em 2em;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        transition-duration: 0.4s;
+        cursor: pointer;
+
+    }
+    button#readmore:hover {
+      background-color: #008CBA;
+      color: black;
+      background-color: white;
+      transition-duration: 1s;
+    }
+    #search_btn{
+        margin-bottom: -10px;
+    }
+    .search{
+        float:right;
+        margin-top:10px
+    }
+    .search input{
+        padding: 5px;
+    }
+    @media  screen and (max-width: 700px) {
+    .article{
+        flex-direction: column;
+        width:90%;
+        margin:auto;
+        margin-bottom: 30px;
+        border: none; 
+    }
+    .article_element{
+        width:100%;
+        margin: 0;
+        padding: 0;   
+    }
+    .article_image{
+    
+        width:100%;
+        height: 200px;  
+    }
+    .blogcontainer{
+        width: 95%;
+        margin: auto;
+    }
+    .search{
+        display: none;
+    }
    
     
-   
-    
-
-      
-}
-.article_element{
-    width:50%;
-    margin-left:10px;
-    padding:5%
-}
-.article_image{
-
-    width:50%;
-    height:inherit;
-
-}
-.article_image img{ 
-
- align-items: center;
- margin-top: 50px;
-    margin-left: 10px;
-}
-
-.section_title{
-    font-size: 18px;
-    width: 180px;
-    padding:10px;
-    text-align: center;
-    letter-spacing: 6px;
-   border: 1px solid grey;
-   
-    position: absolute;
-    z-index: 2;
-    background-color: white;
-    margin-left: 10px;
-}    
-button#readmore{
-   
-    background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
-  
-  
-  padding: 4%;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  
-  
-  
-}
-button#readmore:hover {
-  background-color: #008CBA;
-  color: white;
-  transition-duration: 1s;
-}
-#search_btn{
-    margin-bottom: -10px;
-}
-.search{
-    float:right;
-    margin-top:10px
-}
-.search input{
-    padding: 1px;
-}
-@media  screen and (max-width: 700px) {
-.article{
-    display: block;
-    width:90%;
-    margin:auto;
-  
-}
-.article_element{
-    width:95%;
-    
-}
-.article_image{
-
-    width:60%;
-    
-
-}
-.blogcontainer{
-    width: 95%;
-    margin: auto;
-}
-.search{
-    display: none;
-}
-
-
-}
-</style>
+    }
+    </style>
 {% endblock %}

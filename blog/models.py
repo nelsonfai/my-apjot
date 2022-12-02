@@ -13,6 +13,10 @@ class Articles (models.Model):
     date =models.DateTimeField(auto_now_add=True)
     image = models.FileField()
     likes =models.ManyToManyField(User, default=None,blank=True, related_name='liked')
+    tagline=models.CharField(max_length=100 ,blank=True,default=True)
+    views = models.IntegerField(default=0)
+    applaud = models.IntegerField(default=0)
+    publish=models.BooleanField(default=False)
 
     def __str__(self):
         return self.title +' | ' + str (self.date)
@@ -25,12 +29,12 @@ class Articles (models.Model):
         return self.liked.all().count()
 
 class Comments (models.Model):
-    
+    name = models.CharField(max_length=222 ,default='')
     article= models.ForeignKey(Articles, related_name='comments' ,on_delete= models.CASCADE)
     comment= models.TextField()
     date= models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=222 ,default='Anonymous')
-    author =models.ForeignKey(User,on_delete= models.CASCADE,default=1) 
+    
+    #author =models.ForeignKey(User,on_delete= models.CASCADE,default=1) 
     
 
     def __str__(self):
@@ -43,6 +47,8 @@ class Like(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     article=models.ForeignKey(Articles,on_delete=models.CASCADE)
     value =models.CharField(choices =LIKE_CHOICES, default='Like', max_length=10)
+   
+
 
 
 

@@ -1,79 +1,74 @@
 {% extends 'main\base_layout.html' %}
 {% block content %}
-
-<div class="articles">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<article class="articles">
    
     
     <div class="article">
        
         <h1 id="title"> <a href="{% url 'details' courseid=article.slug %}"> {{ article.title }}  </a> </h1>
         <br>
+        <p style="color:grey;" > {{ article.tagline}}</p>
+        <br>
         <p class="date"> {{article.date}} </p>
-        <br>
-        <br>
-        <div class="article_image"><img src="{{ article.image.url }}" alt=" image" width="100%" > </div>
-        <br>
-        <br>
-        <p> {{ article.body| safe}} </p>
-        
-        <br>
-        <br>
-        {% if user.is_authenticated %}
 
-                <form action="{% url 'like_article' courseid=article.slug %}" method="post">
+        <br>
+        <br>
+        <div class="article_image" style=" background:url('{{article.image.url}}'); background-size: cover;
+        background-repeat: no-repeat;
+        background-position:center;"> 
+           
+        </div>
+        <br>
+        <br>
+        
+        <div class="articleBody"> {{ article.body| safe}} </div>
+     
+        
+
+                <form action="{% url 'like_article' courseid=article.slug %}" method="post" id="applaud">
                     {% csrf_token %}
-                <input type="hidden" name="article_id" value="{{ article.id }}" >   
-                
-                {% if user not in article.likes.all %}
-                    <button type="submit"  style="background:transparent; border:none; color:transparent;"> <img src="../static/like.png" alt="image" width ="25px" > </button><strong> {{article.likes.all.count}}</strong>
-                {% else %}
-                    <button type="submit" style="background:transparent; border:none; color:transparent;"> <img src="../static/love.png" alt="image" width ="25px" > </button><strong> {{article.likes.all.count}}</strong>
-
-                {% endif %}   
+                   <input type="hidden" name="article_id" value="{{ article.id }}" >   
+                 <button type="submit"  style="background:transparent; border:none; color:transparent;margin-block: 20px;"> <img src="../static/like.png" alt="image" width ="25px" style = "margin-bottom: -10px; margin-right: 10px;"> </button><strong id="applaudcount">{{article.applaud}}</strong>
                 </form>
-        {% else %}
-             <button onclick= "Verify()"  style="background:transparent; border:none; color:transparent;">  <img src="../static/like.png" alt="image" width ="25px"> </button>
-             
-             <p  style=" color:red;"><a href="{% url 'login'%}" id="likealert" style=" color:red;">  </a> </p>   
-        {% endif %}
-        
-       <br>
         <br>
-<p style="text-align:left; display: inline; color:red">       
-{% if prevpost %} 
-<a href="{{ prevpost.slug}}" class="detail_nav">&laquo; {{prevpost.title}}</a>
- {% else %}
- <a href="{% url 'blogHome'%}" class="detail_nav"> &laquo; Blog Home</a>
-{% endif %}
-</p>
+                
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox"></div>
+            
+            
+
+<div class="paginationNav" style="text-align:left; display: inline; color:red">       
+    {% if prevpost %} 
+        <a href="{{ prevpost.slug}}" class="detail_nav">&laquo; Previous</a>
+        {% else %}
+        <a href="{% url 'blogHome'%}" class="detail_nav"> &laquo; Blog Home</a>
+    {% endif %}
+</div>
 
 
 <p style=" float:right; display: inline;" > 
 {% if nextpost %}
-<a href="{{ nextpost.slug}}" class="detail_nav"> {{nextpost.title}} <span>&raquo; </span> </a>
+<a href="{{ nextpost.slug}}" class="detail_nav"> Next &raquo; </a>
  {% else %}
  <a href="{% url 'blogHome'%}" class="detail_nav">Blog Home &raquo;</a>
 {% endif %}
 </p> 
-    </div>
+</div>
 
 <br>
 <br>   
-    <div class="comment">  
-        <h4 class="comments"> Comments ({{ article.comments.all.count }})  </h4><br>
-        
+    <div class="comment" id="commentcontainer">  
+        <h4 class="comments"> Comments ({{ article.comments.all.count }}) </h4><br>
         {% for comment in p %}
         <p id="comment_name"><img src="../media/profile-user.png" alt="profile" class="user" > 
-            {{ comment.author}}                      
+            {{ comment.name}}                      
           </p> 
            <p class="comment_date"> {{ comment.date}}</p> 
-           
-        <p id="comment_text"> {{ comment.comment }}</p>
-        
+          <p id="comment_text"> {{ comment.comment }}</p>
         <br>
-
         {% endfor %}
-      
+    </div> 
        <form action="{% url 'details' courseid=article.slug %}" method="post" id="commentform">
            {% csrf_token %}
 
@@ -81,40 +76,91 @@
            {% if user.is_authenticated %}
            <input type="submit" value="send" class="btn41-43 btn-43">
            {% else %}
-           <input type='button' value="Submit" class="btn41-43 btn-43" onclick="commentAlert()" >
+           <input type="submit" value="send" class="btn41-43 btn-43">
+           <!--<input type='button' value="Submit" class="btn41-43 btn-43" onclick="commentAlert()" hidden > -->
            {% endif %}
-
        </form>
        <br>
        <p id="commentalert" style="color: red;"> </p>
-      
-
-
-     
+ 
     
-    </div>
-    <style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let form = document.getElementById('commentform')
+        let commentContainer = document.getElementById('commentcontainer')
+        let applaud = document.getElementById('applaud')
+        let applaudcount = document.getElementById('applaudcount')
+
+        form.addEventListener('submit', stopReload)
+        function stopReload(e){
+        e.preventDefault()
+          
+          let commenter = document.createElement('div')
+          
+          
+          $.ajax({
+                type: "POST",
+                url: "{% url 'details'   courseid=article.slug  %}",
+                data: $("#commentform").serialize(),
+                datatype: "json",
+                success:function(data){
+                    
+                commenter.innerHTML =`<p id="comment_name"><img src="../media/profile-user.png" alt="profile" class="user" > 
+                                        ${data.name}                  
+                                        </p> 
+                                        <p class="comment_date"> now </p> 
+                                        <p id="comment_text"> ${data.comment} </p>
+                                        <br>`
+                    
+                commentContainer.appendChild(commenter)
+               
+                form.reset()
+                            }
+                })
+            }
+
+
+        applaud.addEventListener('submit', applaudReload)
+        function applaudReload(e){
+        e.preventDefault()
+          
+          let commenter = document.createElement('div')
+          
+          
+          $.ajax({
+                type: "POST",
+                url: "{% url 'like_article' courseid=article.id %}",
+                data: $("#applaud").serialize(),
+                datatype: "json",
+                success:function(data){
+                    
+                    applaudcount.innerText = data.applaudcount
+                            }
+                })
+            }
+      
+</script>
+<style>
 .articles{
-    width:50%;
+    width:60%;
     margin:auto;
     margin-top:20px;
     padding: 10%;
     padding-top: 2%;
-    border:1px solid grey;
     font-family: 'Open Sans', sans-serif;
 }
 .comment{
     width: 90%;
     margin:auto;
-   padding: auto;
-    
+   padding: auto;   
 }
 .article_image{
-   
-    width: 50%;
-    
-    
-
+    width: 100%;
+    height: 500px;
+    background: url('');
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
 }
 .article .date{
     color:GREY;
@@ -122,42 +168,64 @@
 }
 .article #title{
     letter-spacing: 3px;
+    font-size: calc(1.2em + 1vw);
 }
 .comment_date{
     color:grey;
     font-size: 10px;
     margin-left: 15px;
-
 }
 #comment_text{
-    font-size: 12px;
     margin-top: 5px;
     margin-left: 15px;
+    font-size: 1em;
 }
 .name_field{
     width: 100%;
     padding:2%;
     margin-bottom:2%;
     font-family: 'Open Sans', sans-serif;
-    border-radius: 10px;
-    
+    border-radius: 10px;    
 }
 .comment_name{
     font-size: 13;
-
 }
 .comment_field{
     width: 100%;
     padding:2%;
-    margin-bottom:2%;
+    margin-block:2%;
     font-family: 'Open Sans', sans-serif;
     border-radius: 10px;  
     height: 40px;
-
 }
 .detail_nav{
-    color:blue
+    font-weight: bold;
+    display: inline-block;
+    width: 50%;
 }
-    </style>
-    {{paginated_article}}
+.articleBody{
+    line-height:1.8em;
+    font-size: 1.3em;  
+}
+q{
+    font-weight: bold;      
+}
+q::before{
+    content: "";
+    border-left: 1px solid red;
+    padding-left: 5%;
+    margin-block: 10px;
+}
+@media screen and (max-width:768px) {
+    .articles{
+    width:80%;
+    margin:auto;   
+}  
+.article{
+    width: 100%;
+}   
+}
+</style>
+
+
     {% endblock %}

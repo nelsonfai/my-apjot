@@ -29,7 +29,7 @@
         <p> {{ result.snippet|safe}}  </p>
         <br>
          <a href="{% url 'details' courseid=result.slug %}"> <button class="readmore">Read More</button> </a> <br>
-
+         
 </div>
 
 </div>
@@ -41,6 +41,9 @@
 {% endif %}
 
 <style>
+    .recent_posts{
+        display:none
+    }
     .article{
         display: flex;
         margin: auto;

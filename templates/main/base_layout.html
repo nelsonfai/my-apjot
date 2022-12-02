@@ -8,42 +8,20 @@
     <title>Apjot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <script src="https://kit.fontawesome.com/6077df5cfa.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   
 </head>
     <body>
-            <div id="circle"> </div> <!--   follows mouse-->
             <nav>
-                
-
                 <div class="logo"> <a href="{% url 'homepage'%}">  Apjot</a> </div>
                 <div class="navlinks" id="navlinks"> 
                         
                         <a href="{% url 'homepage'%}"> Home</a>
-                        <a id="pod" href="{% url 'podcastHome'%}">Podcast <img src="../media/2.svg" alt="" width="15px"> </a>
+                        <span hidden> <a id="pod" href="{% url 'podcastHome'%}" >Podcast <img src="../media/2.svg" alt="" width="15px" > </a> </span>
                         <a id="blog" href="{% url 'blogHome'%}">Blog</a>
-                        <a href=" {% url 'about'%}">About</a>
-                        
-                        
-                        {% if not request.user.is_authenticated %}
-                        
-                        <a id="user" href="{% url 'login'%}">LogIn</a>
-                        
-                        <a id="user" href="{% url 'signup'%}">Sign Up</a>
-                    
-                        {% endif %}
-
-                        {% if request.user.is_authenticated %}
-                        <form action="{% url 'logout'%}" class="logout user2 " method="post" display="hidden">
-                            {% csrf_token %}
-                            <button type="submit" id="logoutBtn">logout</button>
-                        </form>
-                        
-                        <p class="user2"> <img src="../media/profile-user.png" alt="profile" class="user ">{{user.username}}</p>
-                        {% endif %} 
-                    
-                        
+                        <a href=" {% url 'about'%}">About</a>  
                 </div>
                 
                     {% if request.user.is_authenticated %}
@@ -62,11 +40,9 @@
                     {% endif %}     
                 
         
-                <div class="hamburger-lines" onclick="Toggle()">
-
-                        <span class="line line1"></span>
-                        <span class="line line2"></span>
-                        <span class="line line3"></span>
+                <div class="hamburger-lines" >
+                    <i class="fa-solid fa-bars" style="font-size: 2em;" onclick="Toggle()" id="ham"></i>
+                    <i class="fa-sharp fa-solid fa-xmark " style="font-size: 2.3em;" onclick="Toggle()" id="x"></i>
                 </div> 
                     
                     
@@ -80,35 +56,6 @@
                 {% endblock %}
             </div>
 
-
-            
-
-
-
-            <section class="recent_posts" > 
-            
-                <h3 class="section_title" style="border:none ;position: relative; width: 300px;text-align: left;"> Related Articles </h3>    
-            
-                <div class="episode_container" >
-                    {% for article in articles%}
-                    <div class="episode_element"> 
-                
-                        <div class="img"><a href="{% url 'details' courseid=article.slug %} ">
-                            <figure>
-                                <img src="{{ article.image.url }}" width="100%" alt=""> <!--  image must be square image 300px-->
-                                
-                                <figcaption>  <a href="{% url 'details' courseid=article.slug %}"> {{article.title}}</a></figcaption>
-                            </figure>
-                        </div>
-                        
-                                
-                    </div>
-
-                    {% endfor %}
-                    
-                </div>
-                
-        </section>
 
         <footer>
                 <br>
@@ -127,6 +74,9 @@
                 </div> 
                 
         </footer>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6341aa238960643d"></script>
+
 </body>
 </html>
 

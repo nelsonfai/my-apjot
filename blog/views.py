@@ -9,74 +9,65 @@ from django.urls import reverse_lazy,reverse
 from datetime import datetime
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import  JsonResponse
 
 
 #Shared view data
 def data():
     global articles_list
-    articles_list=Articles.objects.all().order_by('-date')
+    articles_list=Articles.objects.filter(publish=True).order_by('-date')
     return articles_list
 
 
 
 def bloghome(request):
-       
+      
        articles=data()
-       related_articles=data()[1:5]
-       p =Paginator(articles,per_page=2)
+       
+       p=Paginator(articles,per_page=5)
        page=request.GET.get('page')
        paginated_article=p.get_page(page)
-       
-       
-
-
-
-
-    
-       return render(request, 'blog/index.html',{'articles':related_articles,'paginated_article':paginated_article})
+       return render(request, 'blog/index.html',{'paginated_article':paginated_article})
 
     
 def article_details(request,courseid):
-       articles= data()[1:5]
-       article =Articles.objects.get(slug=courseid)
-       single =Articles.objects.get(id=article.id)
-       nextpost =Articles.objects.filter(id__gt=single.id).order_by('id').first()
-       prevpost =Articles.objects.filter(id__lt=single.id).order_by('id').last()
-       user= request.user
-       comment_form = CommentForm()
-       p=article.comments.all().order_by('-date')[0:5]
 
-     
-       
-       
-      
-       pass_on ={
-           'article':article,
-           'comment_form':comment_form,
-           'user':user,
-           'prevpost':prevpost,
-           'nextpost':nextpost,
-           'articles':articles,
-           'p':p
-           
-           
-       }
-       
-       if request.method=='POST':
+        article =Articles.objects.get(slug=courseid)
+        if request.method=='POST':
 
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid():
                 obj= comment_form.save(commit=False)
                 obj.article = article
-                obj.author = request.user
+                
                 obj.save()
-                return redirect('details' ,courseid=article.slug)      
+             #   return redirect('details' ,courseid=article.slug)      
+            #else:
+             #   comment_form =CommentForm()
+                return JsonResponse({'name': obj.name, 'comment': obj.comment ,'status':'form submitted'})
             else:
-                comment_form =CommentForm()
-           
-
+                return JsonResponse({'status':'form not submitted'})
+        else:
+                articles= data()[1:5]
+                article.views +=1
+                article.save()
+                single = Articles.objects.get(id=article.id)
+                nextpost =Articles.objects.filter(publish=True).filter(id__gt=single.id).order_by('id').first()
+                prevpost =Articles.objects.filter(publish=True).filter(id__lt=single.id).order_by('id').last()
+                user= request.user
+                comment_form = CommentForm()
+                p=article.comments.all().order_by('-date')[0:5]
+                pass_on ={
+                    'article':article,
+                    'comment_form':comment_form,
+                    'user':user,
+                    'prevpost':prevpost,
+                    'nextpost':nextpost,
+                    'articles':articles,
+                    'p':p    
+                }
        
-       return render(request, 'blog/details.html',pass_on)
+        return render(request, 'blog/details.html',pass_on)
 
 def search(request):
     
@@ -88,8 +79,6 @@ def search(request):
 
         return render (request,'blog/search.html',{'searched':searched, 'results':results,})
       
-
-
 def like_article(request,courseid):
     user=request.user
     if request.method=='POST':
@@ -106,11 +95,19 @@ def like_article(request,courseid):
             else:
                 like.value ='Like'
         like.save()
-
-
-
-
     return HttpResponseRedirect(reverse('details',args=[str(article.slug)]))
+
+def applaud(request,courseid):
+    if request.method=='POST':
+        article_id=request.POST.get('article_id')
+        article=Articles.objects.get(id=article_id)
+        article.applaud += 1
+        article.save()
+        return JsonResponse({'applaudcount': article.applaud})
+    else:
+        return JsonResponse({'applaudcount': article.applaud})
+   
+    return HttpResponseRedirect(reverse('details',args=[str(article.slug)]))    
 def contact(request):
     if request.method=="POST":
         contact=Contact() 
@@ -118,10 +115,6 @@ def contact(request):
         email=request.POST.get('email')
         subject=request.POST.get('subject')
         message=request.POST.get('message')
-
-        
-        
-
         contact.name=name
         contact.subject=subject
         contact.email=email

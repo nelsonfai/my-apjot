@@ -2,240 +2,167 @@
  
 
 {%block content%}
+<script src="https://kit.fontawesome.com/6077df5cfa.js" crossorigin="anonymous"></script>
+
     <section class ="hero" > 
-        <div class="hero-text "  onmouseover="pointLarge()" onmouseout="pointNormal()"><p id="head"> A Public Journal of Thoughts</p>
-            <p  id="tag"> Lorem, ipsum Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet. co. dolor sit amet usto de background </p>
+        <div class="hero-text "> <h1 id="head"> A Public Journal of Thoughts 	
+            &#129042;<span class="tagline"> <strong> Self-growth through Self-Exploration</strong> </span> </h1> 
+            
+            <div id="roundbutton"> <span><a href="{% url 'about'%}"> About  &#8595; </a></span> <span> <a  href="{% url 'blogHome'%}">Blog &#129042;</a></span></div>
         </div>
-         
-        
-           <a href="{% url 'signup'%}"><button  > Join us today! </button></a> 
+        <a  href="{% url 'blogHome'%}">
 
-        <div class="apjotcontainer">
-                 <div id="a" class ="apjot">A</div>
-                 <div id="p" class ="apjot">P</div>
-                 <div id="j" class ="apjot">J</div>
-                 <div id="o" class ="apjot">O</div>
-                 <div id="t" class ="apjot">T</div>
-         </div>
-
-    </section>
-    <br>
-    <br>
-
-    <section class ="description_container"> 
-        <div class="one_left  fadeleft"   > 
-            <h2> So ... </h2>
+        <div class="gridWrapper">
             
-            <span> &#x2198;</span>
-        </div >
+            <div class="box a" style="background: url('https://images.pexels.com/photos/57018/pexels-photo-57018.jpeg?auto=compress&cs=tinysrgb&w=600');">
+                
+            </div>
+            <div class="box b" style="background: url('https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')">
+            </div>
+            <div class="box c" style="background: url('https://images.pexels.com/photos/112854/pexels-photo-112854.jpeg?auto=compress&cs=tinysrgb&w=600');">
+               
+            </div>
+            <div class="box d" style="background: url('https://images.unsplash.com/photo-1589561253831-b8421dd58261?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fHdyaXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');">
+            </div>
+          </div>
+      
+        </section>
+    </a>
 
-        <div class="two_right faderight" ><h3> Lorem ipsum dolor sit amet, consectetur adipisicing Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, aspernatur. Rerum, maiores.</h3><br>
-           
-           <span> &#x2199;</span>
-        </div>
-
-        <div class="threeleft  fadeleft"  > 
-            <h3> OR .. Lorem, ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, commodi! </h3>
-            
-            <span> &#x2198;</span>
-        </div >
-
-        <div class="four_right faderight" ><h3> Lorem ipsum dolor sit amet, consectetur adipisicing Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, aspernatur. Rerum, </h3>
-            
-            <div class="center"> <span>&#11174; </span></div>
-         </div>
-
-       
-
-    
-         
-         <div class="five_center fadeforward sectionDiv"> <h3> Well that's just  a thought!</h3>
-            
-         </div>
-     </section>
-     
-            
-     </div>
      
 <style>
+ .infobox{
+    font-size:24px;
+    padding: 2%;
+    border-block: 1px solid black;
+ }
 .recent_posts{
         display:none
     }
 .hero{
     width:90%;
     margin:auto;
-    
+   
 }
 
 .hero #head{
-    text-align: center;
+    
+    font-family: 'Work Sans', sans-serif;
+    font-size: calc(4em + 3vw );
+    margin: 2%;
+    height:auto;
+    animation-name: fade_left;
+    animation-duration: 3s;
+
+}
+ #tag {
+    font-size: 1.4em;
+   background-color: #f5f5f5;
+    line-height: 1.5em;
+    margin-block: 50px;
+    padding: 3%;
+
+} 
+#tag::before{
+    content: '';
+    border-left:1px solid red ;
+    
+    
+}
+h3{
     font-family: 'Kdam Thmor Pro', sans-serif;
-    font-size: 70px;
+    font-size: calc(3vw );
     margin:2%;
     height:auto;
     animation-name: fade_left;
     animation-duration: 3s;
-   
-
-}
-.hero #tag {
-    text-align: center;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 20px;
-    width:50%;
-    margin:auto;
-   
-    
-    
-    
-}   
-.hero{
+    color: grey;
   
-    
-    
-    background-repeat: repeat;
-    
-    
-    
-    background-size: 1500px 900px;
-    background-repeat: no-repeat;
-    
 }
-.hero-text{
-    margin-bottom: 90px;
-    
+hr{
+  border:  1px solid black
 }
- a button {
-    background-color: red;
-    border: none;
-    color: white;
-    padding: 1%;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
+.gridWrapper{
+    
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 25% 25% 50%;
+    background-color: #fff;
+    width: 100%;
     margin:auto;
-    cursor: pointer;
   }
- .apjotcontainer{
-     font-size:80px;
-     font-family: 'Kdam Thmor Pro', sans-serif;
-     display:flex;
-     
-     -webkit-text-fill-color: #ffffff;
-     -webkit-text-stroke: 1pt grey;
-     width: 90%;
-     margin: auto;
-     justify-content:space-between;
-     margin-top: 80px;
+
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+    height: 300px;
+    background-position: cover;
+    background-position: center;
+
+
+  }
+
+  .a {
+    grid-column: 1 / span 2;
+
+  }
+  .b {
+    grid-column: 3 ;
+    grid-row: 1 / span 2;
+    height: 650px;
+  }
+  .c {
+    grid-column: 1 ;
+    grid-row: 2 ;
+  }
+  .d {
+    grid-column: 2 ;
+    grid-row: 2 ;
+  }
+  #roundbutton span{
+    display: inline-block;
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    margin: 10px
     
-
- }
- .apjot{
-  border: 1px ridge grey;
-  width:100px;
-  text-align:center;
-
- }
- 
- #a{
-    transform: rotate(37deg);
+  }
+  #roundbutton{
+    display: flex;
     
- }
- #p{
-    transform: rotate(-34deg);
-    
- }
- #j{
-    transform: rotate(37deg);
-    
- }
- #o{
-    transform: rotate(-30deg);
-    
- }
- #t{
-    transform: rotate(-20deg);
-   
- }
-
- .description_container{
-     width:50%;
-     margin:auto;
-     margin-top: 5%;
-     font-family: 'Shadows Into Light', cursive;
-     letter-spacing: 0.0825em;
-     
- }
- .description_container div{
-   width: 100%;
-   margin-bottom: 7%;
-
-}
-.description_container div:hover{
-    transform: scale(1.1);
-}
-
-.center {
-    display: block;
-  text-align: center;
-}
-.two_right{
-    margin-left:auto;
-margin-right:0;
-text-align: right;
-}
-
-.four_right{
-margin-left:auto;
-margin-right:0;
-text-align:left;
-}
-
-.five_center{
-    margin:auto;
-    color:blueviolet;
-    padding-left: 20%;
-    font-size: 40px;
-}
-
-span{
-    font-size: 60px;
-    color:red;
-}
-
-.sectionDiv{
-    width: 80%;
-    margin: auto;
-}
-
-
-
-
+  }
 @media screen and (max-width:900px) {
 .hero{
     width:100%;
     margin:auto;
+  
     
 }
 
 .hero #head{
-    text-align: center;
-    font-family: 'Kdam Thmor Pro', sans-serif;
-    font-size: 50px;
-    margin:2%;
-    margin-top: 10%;
-    height:auto;
-    animation-name: fade_left;
-    animation-duration: 3s;
-   
+
+   margin:2% 5%;
+   margin-top: 10%;
+   height:auto;
+   animation-name: fade_left;
+   animation-duration: 3s;
+   width:100%;
+  
 
 }
 .hero #tag {
-    text-align: center;
+  
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 15px;
-    width:80%;
+    
+    width: 90%;
     margin:auto;
   
 }   
@@ -244,80 +171,19 @@ span{
     margin-bottom:12px;
     
 }
-a button {
-   padding: 2%; 
-
-  }
-  .two_right{
-   
-margin:auto;
-text-align: right;
-}
-
-.four_right{
-margin:auto;
-
-text-align:left;
-}
-.five_center{
-    margin:auto;
-}
-.description_container{
-     width:70%;
-     margin:auto;
-     font-family: 'Shadows Into Light', cursive;
-     letter-spacing: 0.0825em;
-     font-size: smaller;
-     
- }
- .five_center{
-    margin:auto;
-    color:blueviolet;
-    padding-left: 8%;
-    font-size: 25px;
-}
-
-span{
-    font-size: 60px;
+.gridWrapper{
     
+    display: block;
+    grid-gap: 10px;
+    grid-template-columns: 25% 25% 50%;
+    background-color: #fff;
+    width: 100%;
+    margin:auto;
+  }
+  .b{
+    height: 300px;
+  }
 }
-
-}
-
-@keyframes fadesleft{
-    from{
-        transform: translateX(-40%) scale(0.9); 
-        opacity: 0;
-    }
-    to{
-        transform: translateX(0%) scale(1); 
-        opacity: 1;
-    }
-}
-
-@keyframes fadesright{
-    from{
-        transform: translateX(40%) scale(0.9); 
-        opacity: 0;
-    }
-    to{
-        transform: translateX(0%) scale(1); 
-        opacity: 1;
-    }
-}
-
-@keyframes fadesforward{
-    from{
-        transform:  scale(0.5); 
-        opacity: 0;
-    }
-    to{
-        transform: scale(1.5); 
-        opacity: 1;
-    }
-}
-
-
 
 </style>
 

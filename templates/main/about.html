@@ -1,7 +1,7 @@
 {% extends 'main\base_layout.html' %}
 {% block content %}
 
-<h1 class="page_title">About Us</h1>
+<h1 class="page_title">About</h1>
 <div class="about-container"> 
     <div class="about-image"> <img src="../static/about.svg" width="70%" >  </div>
     <div class="about"> 
@@ -34,14 +34,14 @@
       
 
 </div>
-<p id="tagline"> <strong> Self-growth through Self-Exploration</strong> </p>
+<p class="tagline"> <strong> Self-growth through Self-Exploration</strong> </p>
 <style> 
 .page_title{
     
     text-align: center;
     padding: 2%;
     margin-bottom: 10px;
-    font-size: 50px;
+    font-size: calc(30px + 3vw);  
 
     
 }
@@ -56,10 +56,7 @@
     margin:auto;
     justify-items:center;
     font-family: 'Open Sans', sans-serif;
-    
-    
-    
-    box-shadow: 2px -2px 10px rgba(0, 0, 0, .2)
+
 }
 .about{ 
     width:65%; 
@@ -87,22 +84,12 @@
     letter-spacing: 2px;
     margin-top:20px;
 }
-#tagline{
-    
-    
-    text-align: center;
-    font-family: 'Shadows Into Light', cursive;
-    letter-spacing: 2px;
-    
 
-}
     
 @media  screen and (max-width: 900px) {
- 
   .about-container{
     display: block;
-    box-shadow: none
-   
+    box-shadow: none   
 }
 .about{
     width:90%;
@@ -119,8 +106,6 @@
 width: 100%;
 }
 }
-
-
 </style>
 
-    {% endblock %}
+{% endblock %}
