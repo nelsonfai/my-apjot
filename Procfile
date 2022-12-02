@@ -1,1 +1,1 @@
-web: gunicorn apjot.wsgi
+web: gunicorn apjot.wsgi --log-file -
