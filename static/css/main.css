@@ -3,10 +3,7 @@
     padding:0
 
 }
-body, html{
-    width:100%;
-    overflow-x:hidden;
-}
+
 button.readmore{
 
     background-color: white;
@@ -280,7 +277,7 @@ nav .navlinks{
    
     width:100%;
     height: 100vh;
-    z-index: 2;
+    z-index: 3;
     display: none;
    
     
