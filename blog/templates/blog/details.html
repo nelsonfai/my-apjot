@@ -112,6 +112,7 @@
         form.addEventListener('submit', stopReload)
         function stopReload(e){
         const csrftoken = getCookie('csrftoken');
+           console.log(csrftoken)
         e.preventDefault()
           
           let commenter = document.createElement('div')
