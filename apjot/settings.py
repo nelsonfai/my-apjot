@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-as&l9#gl@(wqa%^^h8t25n-+#t8zfa8^ow5cl(js9llayllcay
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my-apjot-production.up.railway.app','www.apjot.blog','apjot.blog']
+ALLOWED_HOSTS = ['my-apjot-production.up.railway.app','www.apjot.blog','apjot.blog','127.0.0.1']
 
 
 # Application definition
