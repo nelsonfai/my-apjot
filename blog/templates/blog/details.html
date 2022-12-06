@@ -8,7 +8,7 @@
        
         <h1 id="title"> <a href="{% url 'details' courseid=article.slug %}"> {{ article.title }}  </a> </h1>
         <br>
-        <p style="color:grey; font-size: 1.5rem;" > {{ article.tagline}}</p>
+        <p style="color:grey; font-size: 1.3rem;" > {{ article.tagline}}</p>
         <br>
         <p style="color: grey;"> By Nelson Fai </p>
         <p class="date"> {{article.date}} </p>
@@ -190,7 +190,7 @@
 }
 .article #title{
     letter-spacing: 3px;
-    font-size: calc(1.3rem + 2vw);
+    font-size: calc(1.6rem + 2vw);
     font-family: Times, serif;
 }
 .comment_date{
@@ -244,7 +244,7 @@ q::before{
 @media screen and (max-width:768px) {
     .articles{
     width:90%;
-    padding: 5% 5%;
+    padding: 10%  7% ;
     margin:auto;   
 }  
 .article{

@@ -16,7 +16,7 @@
             background-size:cover; background-repeat: no-repeat;">
             </div>
             <div class="article_element" >
-                <h2><a href="{% url 'details' courseid=article.slug %}" > {{article.title}}</a></h2><br>
+                <h2><a href="{% url 'details' courseid=article.slug %}" > {{article.title}}</a></h2>
                 <p style="color: grey;"> {{ article.tagline }} </p>
                 <p> {{ article.snippet|safe}}  </p>
                 <br>
@@ -44,7 +44,11 @@
 </div>
 
 <style > 
-
+    h2{
+    font-size: calc(1.5rem + 2vw);
+    margin-bottom: 5px;
+    font-family: Times, serif;
+}
     .blogcontainer{
         width:90%;
         max-width: 769px;
@@ -66,7 +70,7 @@
         justify-content: space-between;
         border: 1px solid grey;
         font-family: 'Open Sans', sans-serif; 
-        font-size: 1.18rem;    
+        font-size: 1.1rem;    
     }
     .article p{
         line-height: 1.6em;
