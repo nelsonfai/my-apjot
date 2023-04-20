@@ -1,11 +1,7 @@
 {% extends 'main/base_layout.html' %}
 {% block content %}
 <div class="blogcontainer">
-    <form class="search" action="{% url 'search' %}" method="post">
-{% csrf_token %}
-        <input type="text" placeholder="search.." name="search_input" ">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
+
 <h1 class="page_title">Blog</h1>
 <p class="recentPost">Recent post</p>
 <article>  
@@ -77,8 +73,7 @@
     }
     .article_element{
         width:50%;
-        margin-left:10px;
-        padding:5%
+        padding:1rem
     }
     .article_image{
         width:50%; 

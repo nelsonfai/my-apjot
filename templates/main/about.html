@@ -3,7 +3,6 @@
 
 <h1 class="page_title">About</h1>
 <div class="about-container"> 
-    <div class="about-image"> <img src="../static/about.svg" width="70%" >  </div>
     <div class="about"> 
         <h3	> Hi  {% if user.is_authenticated %}{{user.username|title}} 
             {% endif %}! So Glad You're Here. </h3>
@@ -62,11 +61,8 @@
 
 }
 .about{ 
-    width:65%; 
-    padding-left:3%; 
-    padding-right: 5%;
+text-align: center;
     line-height:25px; 
-    border-radius:5px solid grey;
   
 }
 .about-image{

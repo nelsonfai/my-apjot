@@ -136,11 +136,7 @@ nav .navlinks{
 
     width: 100%;
     align-items: center;
-
-
     color:white;
-
-
 
 }
 .img:hover{
@@ -239,7 +235,9 @@ footer a{
 }
 
 @media  screen  and (max-width: 900px) {
-
+.logo{
+    margin-top: 20px;
+}
 
     .hamburger-lines{
         display: block;
