@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'podcast',
     'user',
     'ckeditor',
-    'mutagen',
-    'whitenoise'
+    'whitenoise',
 
 ]
 
@@ -81,7 +80,7 @@ WSGI_APPLICATION = 'apjot.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -94,12 +93,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER':'postgres',
-        'PASSWORD':'65nyJl6nsj2vHG8zr8jH',
-        'HOST':'containers-us-west-43.railway.app',
-        'PORT':'7159',    
+        'PASSWORD':'n9uCbN9Dj2keEIeGm2JN',
+        'HOST':'containers-us-west-15.railway.app',
+        'PORT':'7294',
+        
         }
 }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
