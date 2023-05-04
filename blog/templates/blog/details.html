@@ -63,11 +63,12 @@
     <div class="comment" id="commentcontainer">  
         <h4 class="comments"> Comments ({{ article.comments.all.count }}) </h4><br>
         {% for comment in p %}
-        <p id="comment_name"><img src="..\media\profile-user.png" alt="profile" class="user" > 
-            {{ comment.name}}                      
-          </p> 
-           <p class="comment_date"> {{ comment.date}}</p> 
-          <p id="comment_text"> {{ comment.comment }}</p>
+        <div class="comment_name">
+            <div><img src="..\media\profile-user.png" alt="profile" class="user" >  </div>
+            <div>{{comment.name|title}}</div>                      
+        </div> 
+           <div class="comment_date"> {{ comment.date}}</div> 
+          <div id="comment_text"> {{ comment.comment }}</div>
         <br>
         {% endfor %}
     </div> 
@@ -193,32 +194,28 @@
     font-size: calc(1.6rem + 2vw);
     font-family: Times, serif;
 }
+.comment_name{
+    display: flex;
+    justify-items: flex-start;
+    gap:5px
+}
 .comment_date{
     color:grey;
-    font-size: 10px;
-    margin-left: 15px;
+    font-size: small;
 }
-#comment_text{
-    margin-top: 5px;
-    margin-left: 15px;
-    font-size: 1em;
-}
+
 .name_field{
     width: 100%;
-    padding:2%;
-    margin-bottom:2%;
+    padding:1rem;
+    margin-bottom:2rem;
     font-family: 'Open Sans', sans-serif;
-    border-radius: 10px;    
+    
 }
-.comment_name{
-    font-size: 13;
-}
+
 .comment_field{
     width: 100%;
-    padding:2%;
-    margin-block:2%;
+    padding:1rem;
     font-family: 'Open Sans', sans-serif;
-    border-radius: 10px;  
     height: 40px;
 }
 .detail_nav{

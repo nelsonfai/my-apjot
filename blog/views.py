@@ -21,9 +21,27 @@ def data():
 
 
 def bloghome(request):
-      
-       articles=data()
-       
+       category= request.GET.get('category')
+       print(category)
+       if category:
+            if category == 'All':
+                articles=data()
+            elif category == 'lyrics':
+                c_id = 2
+                articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
+            elif category == 'reflection':
+                c_id = 1
+                articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
+
+            elif category == 'poems':
+                c_id = 3
+                articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
+            else:
+                articles=data()   
+
+
+       else:
+            articles=data()   
        p=Paginator(articles,per_page=5)
        page=request.GET.get('page')
        paginated_article=p.get_page(page)

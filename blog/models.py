@@ -3,7 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
-
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    def __str__ (self):
+        return self.name
 # Create your models here.
 class Articles (models.Model):
     title = models.CharField( max_length=100)
@@ -17,6 +20,8 @@ class Articles (models.Model):
     views = models.IntegerField(default=0)
     applaud = models.IntegerField(default=0)
     publish=models.BooleanField(default=False)
+    category=models.ManyToManyField(Category ,related_name='category')
+    password_required = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title +' | ' + str (self.date)
@@ -48,20 +53,12 @@ class Like(models.Model):
     article=models.ForeignKey(Articles,on_delete=models.CASCADE)
     value =models.CharField(choices =LIKE_CHOICES, default='Like', max_length=10)
    
-
-
-
-
-
 class Contact(models.Model):
     name=models.CharField(max_length=100)
     email= models.EmailField()
     subject=models.TextField()
     message=models.TextField()
     time=models.DateTimeField(auto_now_add=True)
-    
-   
-    
     def __str__(self):
         
         return   self.subject +  '  from: '+ '[ '+ self.name +']'+ 'at'  + self.time.strftime("%a, %d %b %Y  %H{+2}:%M ")

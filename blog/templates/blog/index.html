@@ -3,7 +3,18 @@
 <div class="blogcontainer">
 
 <h1 class="page_title">Blog</h1>
+<div class="categorybtns">
+    <button class="btn_nav">All</button>
+    <button class="btn_nav">  <a href="?category=reflections"> Reflections</a></button>
+    <button class="btn_nav"> <a href="?category=lyrics"> Lyrics</a></button>
+    <button class="btn_nav"><a href="?category=poems"> Poems</a></button>
+   
+</div>
+{% if paginated_article %}
 <p class="recentPost">Recent post</p>
+{% else %}
+<p> No item found</p>
+{%endif%}
 <article>  
 
     {% for article in paginated_article %}
@@ -117,6 +128,20 @@
     }
     .search input{
         padding: 5px;
+    }
+    .btn_nav{
+        background-color: lightgrey;
+        padding: 0.5rem 1rem;
+        border: none;
+        font-size: medium;
+    }
+    .categorybtns{
+        margin-bottom: 2rem;
+    }
+    .activebutton{
+        background-color: black;
+        color: white;
+
     }
     @media  screen and (max-width: 700px) {
     .article{
