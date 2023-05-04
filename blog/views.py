@@ -29,7 +29,7 @@ def bloghome(request):
             elif category == 'lyrics':
                 c_id = 2
                 articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
-            elif category == 'reflection':
+            elif category == 'reflections':
                 c_id = 1
                 articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
 
