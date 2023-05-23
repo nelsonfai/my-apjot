@@ -170,6 +170,7 @@ a{
 @media screen and (max-width:768px) {
     nav{
         padding: 1rem;
+
     }
     header{
         padding: 1rem;
@@ -186,6 +187,27 @@ a{
     }
     .hero span{
         margin-bottom: 3rem !important;
+    }
+    #navlinks{
+      display: none;
+      background-color: white;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      align-items: center;
+      left: 0;
+      height: 100vh;
+      z-index: 2;
+      font-size: large;
+    }
+    #x{
+      z-index: 3;
+      position: fixed;
+      top: 2rem;
+      right: 1rem;
     }
     
 }
