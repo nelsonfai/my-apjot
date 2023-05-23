@@ -1,4 +1,4 @@
-{% extends 'main\base_layout.html' %}
+{% extends 'main/base_layout.html' %}
 {% block content %}
 
 {%if searched%}
@@ -11,25 +11,16 @@
 <p style="text-align: center; color:grey;">{{results.count}} result found</p>
 
 <br>
-
-
-
-
-
-
-
-
 {% for result in results %}
 <div class="article" > 
     
-    <div class="article_image"  ><img src="{{ result.image.url }}" alt="article_image" width="40%"    "> </div>
+    <div class="article_image"  style="background-image: {{ result.image.url }};"><img src="" alt="article_image" width="40%"    "> </div>
     <div class="article_element" >
         <h2><a href="{% url 'details' courseid=result.slug %}" > {{result.title}}</a></h2><br>
 
         <p> {{ result.snippet|safe}}  </p>
         <br>
-         <a href="{% url 'details' courseid=result.slug %}"> <button class="readmore">Read More</button> </a> <br>
-         
+         <a href="{% url 'details' courseid=result.slug %}"> <button class="readmore">Read More</button> </a> <br>  
 </div>
 
 </div>

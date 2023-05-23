@@ -4,61 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
-    <title>Apjot .</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static '/css/main.css' %}">
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2958821553002807"
-     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content=" Apjot, public journal of thoughts, blog, podcast, profound insights, diverse perspectives, thought-provoking discussions, vibrant community, elevate your thinking, self-reflection, personal growth, intellectual curiosity,mindfulness,anxiety" />
+    <meta name="description" content="Apjot: Reflect, Explore, Grow. Dive into thought-provoking writings, celebrate diverse ideas, and embark on a journey of personal growth. Philosophy, personal development, science, art, and social commentary await.
+    Welcome to Apjot, a captivating platform empowering reflection and intellectual exploration. Immerse yourself in curated thought-provoking writings where diverse ideas flourish, nurturing personal growth.
+    Unravel existential questions and profound concepts through philosophy, broadening your understanding of the world. Discover practical strategies for personal development, enhancing well-being, productivity, and mindset.
+    Journey through the realms of science and art, exploring cutting-edge discoveries and creative expressions that expand perspectives. Engage with social commentary, exploring current issues and cultural phenomena, gaining insights from diverse perspectives.
+    Join our vibrant community of thinkers, visionaries, and learners. Forge meaningful connections, participate in engaging conversations, and inspire positive change.
+    Embark on a transformative journey of self-discovery and intellectual curiosity. Embrace reflection, challenge assumptions, and expand intellectual horizons.
+    Apjot invites you to reflect, explore, and grow. Celebrate the power of diverse ideas, ignite personal growth, and embrace the endless possibilities that await.
+    Join Apjot today and dive into the enriching world of thought." >
+   
+    <title>{{ page_title }}</title> 
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/files/images/icons/">
+    <link rel="stylesheet" href="index.css">
     <script src="https://kit.fontawesome.com/6077df5cfa.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
+<div class="preloader"> 
+    <div>
+        <img src="{% static 'wired-outline-112-book-morph (1).gif' %}" alt="" style="height: 150px; width: 150px;" width="250px">
+    </div>
+  </div>
     <body>
             <nav>
                 <div class="logo"> <a href="{% url 'homepage'%}">  Apjot</a> </div>
                 <div class="navlinks" id="navlinks"> 
-                        
                         <a href="{% url 'homepage'%}"> Home</a>
                         <span hidden> <a id="pod" href="{% url 'podcastHome'%}" >Podcast <img src="../media/2.svg" alt="" width="15px" > </a> </span>
                         <a id="blog" href="{% url 'blogHome'%}">Blog</a>
                         <a href=" {% url 'about'%}">About</a>  
                 </div>
-                
                     {% if request.user.is_authenticated %}
                     <div class="authen">
-                
-                    
                         <form action="{% url 'logout'%}" class="logout" method="post" display="hidden">
                             {% csrf_token %}
                             <button type="submit" id="logoutBtn">logout</button>
                         </form>
-                        
                         <p> <img src="../media/profile-user.png" alt="profile" class="user">{{user.username}}</p> 
-
                     </div>     
-                    
                     {% endif %}     
-                
-        
                 <div class="hamburger-lines" >
                     <i class="fa-solid fa-bars" style="font-size: 2em;" onclick="Toggle()" id="ham"></i>
                     <i class="fa-sharp fa-solid fa-xmark " style="font-size: 2.3em;" onclick="Toggle()" id="x"></i>
-                </div> 
-                    
-                    
-                        
-                    
+                </div>  
             </nav>
-            
-            
             <div class="wrapper">
                 {% block content %}
                 {% endblock %}
             </div>
-
-
+            <div style="padding: 2rem 1rem; text-align: center;border-top:1px solid  rgba(17, 17, 26, 0.1) ;margin-top: 2rem;">
+                <h3 style="font-size: xx-large;">Join Our Weekly Newletter</h3>
+                <p style="text-align: center;margin-block: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic ut quis quidem deserunt. Inventore at aliquam eligendi id delectus sit.!</p>
+                <form action="{% url 'subscribe' %}" method="post" style="display: flex; width: 100%;max-width: 600px; margin: auto;" id="newsletterForm">
+                    {% csrf_token %}
+                    <input type="email" name="subscribeEmail" id="subscribeEmail" placeholder="Enter email address" style="padding:1rem;width: 100%;font-size: large;" required>
+                    <input type="text" value="{{csrf_token}}" name="token" id="token" hidden readonly>
+                    <input type="submit" value="Subscribe" style="padding: 1rem; background-color: black;color: white;">
+                </form>
+                <p style="text-align: center;margin-top: 1rem;" id="successMessage" ></p>
+            </div>
+            <footer id="footer" >
+                <div class="footer-basic">
+                  <footer>
+                      <div class="social">
+                        <a href="https://www.instagram.com/apjot.blog/" target="_blank" > <i class="fa-brands fa-instagram" style="font-size:25px ;"></i> </a>
+                        <a href=" mailto:contact@faidevstudios.com"><i class="fa-regular fa-envelope"  style="font-size:25px ;"></i> </a>
+                        <a href="tel:015214773540" hidden><i class="fa-solid fa-phone-flip" style="font-size:25px;"></i></a>             </div>
+                      <ul class="list-inline">
+                          <li class="list-inline-item"><a href="{%url 'homepage' %}">Home</a></li>
+                          <li class="list-inline-item"><a href="{%url 'blogHome' %}">Blog</a></li>
+                          <li class="list-inline-item"><a href="{%url 'about' %}">About</a></li>
+                      </ul>
+                      <p >contact@faidevstudios.com</p>
+                      <p class="copyright">Apjot© 2023</p>
+                  </footer>
+              </footer>
 
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6341aa238960643d"></script>
@@ -78,6 +106,43 @@ function Toggle() {
     ham.style.display = 'block';
   }
 }
+</script>
+
+<script>
+$(document).ready(function() {
+    $('#newsletterForm').submit(function(e) {
+        e.preventDefault();
+
+        var email = $('#subscribeEmail').val();
+        var token = $('#token').val();
+        var myurl = '{% url 'subscribe' %}'; 
+
+        $.ajax({
+            url: myurl,
+            type: 'POST',
+            data: {
+                'email': email,
+                'csrfmiddlewaretoken': token
+            },
+            success: function(response) {
+                console.log(response);
+                if (response){
+                    $('#successMessage').text(response.message).css('color','green')
+                    $('#subscribeEmail').val('');
+                }
+       
+
+
+            },
+            error: function(data) {
+                console.log(data)
+                $('#successMessage').text('Ooops something went wrong');
+                $('#successMessage').css('color', 'red');
+
+            }
+        });
+    });
+});
 </script>
 </body>
 </html>

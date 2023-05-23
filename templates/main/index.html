@@ -1,193 +1,139 @@
 {% extends 'main/base_layout.html' %}
- 
-
+{%  load static %}
 {%block content%}
-<script src="https://kit.fontawesome.com/6077df5cfa.js" crossorigin="anonymous"></script>
-
-    <section class ="hero" > 
-        <div class="hero-text "> <h1 id="head"> A Public Journal of Thoughts 	
-            &#129042;<span class="tagline"> <strong> Self-growth through Self-Exploration</strong> </span> </h1> 
-            
-            <div id="roundbutton"> <span><a href="{% url 'about'%}"> About  &#8595; </a></span> <span> <a  href="{% url 'blogHome'%}">Blog <i class="fa-solid fa-arrow-right"></i></a></span></div>
-        </div>
-        <a  href="{% url 'blogHome'%}">
-
-        <div class="gridWrapper">
-            
-            <div class="box a" style="background: url('https://images.pexels.com/photos/57018/pexels-photo-57018.jpeg?auto=compress&cs=tinysrgb&w=600');">
-                
-            </div>
-            <div class="box b" style="background: url('https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')">
-            </div>
-            <div class="box c" style="background: url('https://images.pexels.com/photos/112854/pexels-photo-112854.jpeg?auto=compress&cs=tinysrgb&w=600');">
-               
-            </div>
-            <div class="box d" style="background: url('https://images.unsplash.com/photo-1589561253831-b8421dd58261?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fHdyaXRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');">
-            </div>
-          </div>
-      
-        </section>
-    </a>
-
-     
 <style>
- .infobox{
-    font-size:24px;
-    padding: 2%;
-    border-block: 1px solid black;
- }
-.recent_posts{
-        display:none
-    }
-.hero{
-    width:90%;
-    margin:auto;
-   
-}
-
-.hero #head{
-    
-    font-family: 'Work Sans', sans-serif;
-    font-size: calc(2em + 5vw );
-    margin: 2%;
-    height:auto;
-    animation-name: fade_left;
-    animation-duration: 3s;
-
-}
- #tag {
-    font-size: 1.4em;
-   background-color: #f5f5f5;
-    line-height: 1.5em;
-    margin-block: 50px;
-    padding: 3%;
-
-} 
-#tag::before{
-    content: '';
-    border-left:1px solid red ;
-    
-    
-}
-h3{
-    font-family: 'Kdam Thmor Pro', sans-serif;
-    font-size: calc(3vw );
-    margin:2%;
-    height:auto;
-    animation-name: fade_left;
-    animation-duration: 3s;
-    color: grey;
-  
-}
-hr{
-  border:  1px solid black
-}
-.gridWrapper{
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 25% 25% 50%;
-    background-color: #fff;
-    width: 100%;
-    margin:auto;
-  }
-
-  .box {
-    background-color: #444;
-    color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 150%;
-    height: 300px;
-    background-position: cover;
-    background-position: center;
-
+  .wrapper,nav{
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 
   }
+  .preloader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .a {
-    grid-column: 1 / span 2;
-
   }
-  .b {
-    grid-column: 3 ;
-    grid-row: 1 / span 2;
-    height: 650px;
-  }
-  .c {
-    grid-column: 1 ;
-    grid-row: 2 ;
-  }
-  .d {
-    grid-column: 2 ;
-    grid-row: 2 ;
-  }
-  #roundbutton span{
-    display: inline-block;
-    width:150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: xx-large;
-    margin: 10px
-    
-  }
-  #roundbutton{
-    display: flex;
-    
-  }
-@media screen and (max-width:900px) {
-.hero{
-    width:100%;
-    margin:auto;
-  
-    
-}
-
-.hero #head{
-
-   margin:2% 5%;
-   margin-top: 10%;
-   height:auto;
-   animation-name: fade_left;
-   animation-duration: 3s;
-   width:100%;
-  
-
-}
-.hero #tag {
-  
-    font-family: 'Source Sans Pro', sans-serif;
-    
-    width: 90%;
-    margin:auto;
-  
-}   
-
-.hero-text{
-    margin-bottom:12px;
-    
-}
-.gridWrapper{
-    
-    display: block;
-    grid-gap: 10px;
-    grid-template-columns: 25% 25% 50%;
-    background-color: #fff;
-    width: 100%;
-    margin:auto;
-  }
-  .b{
-    height: 300px;
-  }
-}
-
 </style>
 
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<div id="circle2"> </div> 
 
 
+<header>
+        <div class="hero">
+              <p style="font-size: small; font-weight: 100;  padding-bottom: 10px; text-align: right;"> </p>
+              <h1 class="hero-text" style="font-weight: 800; ">A  <br>  Public Journal <br> of  thoughts </h1>
+              <span style="font-size: large; font-weight: 100; border-bottom: 1px solid #000; padding-bottom: 10px;">Self growth through self exploration</span>
+              <span style="font-size: small; font-weight: 200; border-bottom: 1px solid lightgray; padding-bottom: 10px; float: right;" id="heroSubscribe"><i class="fa-solid fa-envelope"></i> + Subscribe to Newletter </span>
+        </div>
+        <div style="margin: auto;">
+          <div class="circle" onclick="location.href='#values';" id="rotatetext">
+            <div class="text"  style="font-weight:100 ;">
+              <p> scroll. down. scroll. down  </p>
+            </div> 
+            <a href="#values"> <img src="https://img.icons8.com/ios-filled/35/null/chevron-down.png" alt="icon-arrow down"/></a>
+          </div>
+        </div>
+
+</header>
+           
+<section  style="margin-block:2rem;padding-block: 1rem; background-color: whitesmoke;">
+      <h3 class="section-title">Featured post <span style="font-size: 1.5rem;text-transform: initial; font-weight: 100;"> <a href="{% url 'blogHome'%}">See all Posts <i class="fa-solid fa-angle-right"></i> </a></span> </h3>
+      <br>
+      <div class="grid-container" >
+          {% for article in articles %}
+            <div class="grid-div {% if forloop.first %}span-two-rows{% endif %}" style="background-image: url('{{article.image.url}}');">
+              <a href="{% url 'details' courseid=article.slug %}" >
+                <div class="grid-text">
+                  <p>Most Recent Post</p>
+                  <p> Article:{{article.title}}</p>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+      </div>
+</section>
+
+<script>
+const gridDivs = document.querySelectorAll('.grid-div');
+const circle2 = document.getElementById('circle2');
+
+gridDivs.forEach((gridDiv) => {
+  gridDiv.addEventListener('mouseover', () => {
+    circle2.style.transform = 'translate(-50%, -50%)';
+    circle2.style.width = '100px';
+    circle2.style.height = '100px';
+    circle2.style.backgroundColor = 'black';
+    circle2.innerText = 'Read >';
+  });
+
+  gridDiv.addEventListener('mouseout', () => {
+    circle2.style.transform = 'translate(-50%, -50%)';
+    circle2.style.width = '30px';
+    circle2.style.height = '30px';
+    circle2.style.backgroundColor = 'transparent';
+    circle2.innerText = '';
+  });
+});
+
+ </script>
+
+ <script>
+      const text = document.querySelector(".text p");
+      text.innerHTML = text.innerText.split('').map(
+      (char, i) =>
+        `<span style="transform:rotate(${i * 13.3}deg)">${char}</span>`
+    ).join('');
+  
+    let sliderIndex = 1;
+    let timeout;
+    const layers = [...document.querySelectorAll('.layer')];
+    const covers = [...document.querySelectorAll('.photo-frame')];
+  
+    function changeCoverAnimState(state = 0) {
+      const st = state === 1 ? 'running' : 'paused';
+      covers.forEach(cover => {
+        cover.querySelector('.cover').style.width = `${state * 100}%`;
+      });
+    }
+ </script>
+ <script>
+      let circle = document.getElementById('circle2');
+    const onMouseMove = (e) => {
+      circle.style.left = e.pageX + 'px';
+      circle.style.top = e.pageY + 'px';
+    }
+    document.addEventListener('mousemove', onMouseMove);
+ </script>
+
+<script>
+  window.addEventListener('load', function () {
+      var preloader = document.querySelector('.preloader');
+      var nav = document.querySelector('nav');
+      var wrapper = document.querySelector('.wrapper');
+      
+      // Hide preloader after 2 seconds
+      setTimeout(function () {
+          preloader.style.display = 'none';
+      }, 1500);
+      
+      // Smoothly transition body opacity from 0 to 1 over 3 seconds
+      setTimeout(function () {
+          nav.style.opacity = '1';
+          wrapper.style.opacity = '1';
+      }, 1500);
+  });
+</script>
+
+</body>
+</html>
 
   {%endblock%}
    

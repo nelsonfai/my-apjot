@@ -1,4 +1,6 @@
 from audioop import reverse
+from django.db import IntegrityError
+from django.db.utils import IntegrityError as DjangoIntegrityError
 
 from django.shortcuts import redirect, render,get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,7 +12,7 @@ from datetime import datetime
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import  JsonResponse
-
+from .models import NewsletterEmail
 
 #Shared view data
 def data():
@@ -18,46 +20,37 @@ def data():
     articles_list=Articles.objects.filter(publish=True).order_by('-date')
     return articles_list
 
-
-
 def bloghome(request):
        category= request.GET.get('category')
-       print(category)
+       categories = {
+    'plr': 'Philosophy and life reflections',
+    'pdg': 'Personal development and growth',
+    'scc': 'Social and Cultural commentary',
+    'ins': 'Inspirational stories',
+    'mwb': 'Mindfulness and Well being'
+}
+       active = 'All'
        if category:
             if category == 'All':
                 articles=data()
-            elif category == 'lyrics':
-                c_id = 2
-                articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
-            elif category == 'reflections':
-                c_id = 1
-                articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
-
-            elif category == 'poems':
-                c_id = 3
-                articles = Articles.objects.filter(publish=True).filter(category=c_id).order_by('-date')
             else:
-                articles=data()   
-
-
+                articles = Articles.objects.filter(publish=True).filter(category=category).order_by('-date')
+                active = category
        else:
-            articles=data()   
-       p=Paginator(articles,per_page=5)
+            articles=data()  
+       p=Paginator(( articles ),per_page=2)
        page=request.GET.get('page')
        paginated_article=p.get_page(page)
-       return render(request, 'blog/index.html',{'paginated_article':paginated_article})
+       return render(request, 'blog/index.html',{'paginated_article':paginated_article,'category':categories,'active':active,'page_title':'Blogs : Apjot'
+})
 
-    
 def article_details(request,courseid):
-
         article =Articles.objects.get(slug=courseid)
         if request.method=='POST':
-
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid():
                 obj= comment_form.save(commit=False)
                 obj.article = article
-                
                 obj.save()
              #   return redirect('details' ,courseid=article.slug)      
             #else:
@@ -82,20 +75,23 @@ def article_details(request,courseid):
                     'prevpost':prevpost,
                     'nextpost':nextpost,
                     'articles':articles,
-                    'p':p    
+                    'p':p ,
+                    'page_title':f'Apjot: {article.title}'
+ 
                 }
-       
         return render(request, 'blog/details.html',pass_on)
-
 def search(request):
-    
-    if request.method == 'POST':
-        searched =request.POST['search_input']
-        k=Articles.objects.all()
-        results = k.filter(body__contains=searched) 
-        
-
-        return render (request,'blog/search.html',{'searched':searched, 'results':results,})
+        searched =request.GET['searchterm']
+        if searched:
+            k=Articles.objects.filter(body__contains=searched) 
+            p=Paginator((k ),per_page=5)
+            page=request.GET.get('page')
+            paginated_article=p.get_page(page)
+            count = k.count
+        else:
+             results = ''
+             count = 0
+        return render(request, 'blog/index.html',{'paginated_article':paginated_article,'searched':searched,'count':count})
       
 def like_article(request,courseid):
     user=request.user
@@ -150,3 +146,18 @@ def contact(request):
 
 
     return HttpResponseRedirect(reverse('contact'))
+
+
+def subscribe(request):
+    if request.method == 'POST':
+                email = request.POST.get('email')
+                if email:
+                    if NewsletterEmail.objects.filter(email=email).exists():
+                        return JsonResponse({'message': 'You are already registered to Newsletter'})
+                    else:
+                        NewsletterEmail.objects.create(email=email)
+                        return JsonResponse({'message': 'Email added  successfully!'})
+
+
+    return JsonResponse({'error':'Opps something went wrong .Please try again!'})
+

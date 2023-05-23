@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'user',
     'ckeditor',
     'whitenoise',
+    'taggit',
+     
 
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

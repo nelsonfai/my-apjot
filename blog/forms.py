@@ -10,5 +10,6 @@ class CommentForm(forms.ModelForm):
 
         widgets ={
             'name': forms.TextInput(attrs={'class':'name_field','placeholder':'Name','label':''}),
-            'comment': forms.Textarea(attrs={'class':'comment_field','placeholder':'Enter comment here...', 'row':5,})
+            'comment': forms.Textarea(attrs={'class': 'comment_field', 'placeholder': 'Enter comment here...', 'rows': 5}),
+
         }
