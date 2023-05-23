@@ -115,21 +115,21 @@ gridDivs.forEach((gridDiv) => {
 
 <script>
   window.addEventListener('load', function () {
-      var preloader = document.querySelector('.preloader');
-      var nav = document.querySelector('nav');
-      var wrapper = document.querySelector('.wrapper');
-      
-      // Hide preloader after 2 seconds
-      setTimeout(function () {
-          preloader.style.display = 'none';
-      }, 1500);
-      
-      // Smoothly transition body opacity from 0 to 1 over 3 seconds
-      setTimeout(function () {
-          nav.style.opacity = '1';
-          wrapper.style.opacity = '1';
-      }, 1500);
-  });
+    var preloader = document.querySelector('.preloader');
+    var nav = document.querySelector('nav');
+    var wrapper = document.querySelector('.wrapper');
+
+    // Hide preloader after 2 seconds
+    setTimeout(function () {
+      preloader.style.display = 'none';
+    }, 1500);
+
+    // Smoothly transition body opacity from 0 to 1 over 3 seconds
+    setTimeout(function () {
+      nav.style.opacity = '1';
+      wrapper.style.opacity = '1';
+    }, 1500);
+    });
 </script>
 
 </body>
