@@ -1,5 +1,6 @@
 {% extends 'main/base_layout.html' %}
 {% block content %}
+{%load static%}
 
 <article class="articles">
     <div class="article">
@@ -24,7 +25,7 @@
           <form action="{% url 'like_article' courseid=article.slug %}" method="post" id="applaud">
                     {% csrf_token %}
                    <input type="hidden" name="article_id" value="{{ article.id }}" >   
-                 <button type="submit"  style="background:transparent; border:none; font-size:1.3rem;margin-block: 20px; font-weight: thin;"> Like <i class="fa-regular fa-thumbs-up"></i> </button> <span id="applaudcount" style="font-size:1.4rem;">{{article.applaud}}</span>
+                 <button type="submit"  style="background:transparent; border:none; font-size:1.3rem;margin-block: 20px; font-weight: thin;"> <img src="{% static 'like (1).gif' %}" alt="like" width="40px" style="top: 10px; position:relative; cursor: pointer;"> </button> <span id="applaudcount" style="font-size:1.4rem;">{{article.applaud}}</span>
                 </form>
         <br>
                 
