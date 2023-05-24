@@ -37,7 +37,7 @@ li{
   display: none;
 }
 input {
-  -webkit-appearance: none;
+  -webkit-appearance: none ;
 }
 /* General ENd ------------------*/
 
@@ -152,7 +152,9 @@ a{
 
 
 /* animations */
-
+textarea {
+  user-scalable: no;
+}
 @keyframes rotate {
     0%{
         transform: rotate(-0deg);
@@ -175,6 +177,7 @@ a{
     input[type="text"] {
       border-radius: 0;
     }
+
   }
 @media screen and (max-width:768px) {
     nav{
