@@ -1,0 +1,3 @@
+[env]
+RAILWAY_MEDIA_BACKEND = "file"
+RAILWAY_MEDIA_BUCKET = "media"
