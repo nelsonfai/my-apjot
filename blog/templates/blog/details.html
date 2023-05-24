@@ -82,14 +82,14 @@
         <br>
         {% endfor %}
     </div> 
-       <form action="{% url 'details' courseid=article.slug %}" method="post" id="commentform">
+       <form action="{% url 'details' courseid=article.slug %}" method="post" id="commentform" style="width:100%">
            {% csrf_token %}
 
            {{ comment_form.as_p }}
            {% if user.is_authenticated %}
-           <input type="submit" value="send" class="submitbtn">
+           <input type="submit" value="send" class="submitbtn" style="width:100%">
            {% else %}
-           <input type="submit" value="send" class="submitbtn">
+           <input type="submit" value="send" class="submitbtn" style="width:100%">
            {% endif %}
        </form>
        <br>
