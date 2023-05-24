@@ -172,6 +172,9 @@ a{
     input[type="submit"] {
       border-radius: 0;
     }
+    input[type="text"] {
+      border-radius: 0;
+    }
   }
 @media screen and (max-width:768px) {
     nav{
@@ -199,7 +202,7 @@ a{
       background-color: white;
       flex-direction: column;
       justify-content: center;
-      gap: 15%;
+      gap: 2rem;
       position: fixed;
       width: 100%;
       top: 0;
@@ -207,7 +210,7 @@ a{
       left: 0;
       height: 100vh;
       z-index: 2;
-      font-size: large;
+      font-size: x-large;
     }
     #x{
       z-index: 3;
