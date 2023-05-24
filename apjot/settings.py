@@ -16,7 +16,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'whitenoise',
     'taggit',
+    'cloudinary'
      
 
 ]
@@ -154,6 +157,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+cloudinary.config( 
+  cloud_name = "dvgywy7vi",
+  api_key = "592174782539373",
+  api_secret = "_9nQIB5FdyUGOuyaV8DhvuTWEJQ",
+)
 
 
 CSRF_TRUSTED_ORIGINS = ["https://my-apjot-production.up.railway.app","https://www.apjot.blog"]

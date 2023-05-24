@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
+from cloudinary.models import CloudinaryField
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -21,7 +22,9 @@ class Articles (models.Model):
     body = RichTextField( blank=True, null=True)
     slug = models.SlugField()
     date =models.DateTimeField(auto_now_add=True)
-    image = models.FileField()
+    #image = models.FileField()
+    image = CloudinaryField('image')
+
     likes =models.ManyToManyField(User, default=None,blank=True, related_name='liked')
     tagline=models.CharField(max_length=100 ,blank=True,null=True)
     views = models.IntegerField(default=0)
