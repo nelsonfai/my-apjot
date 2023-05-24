@@ -46,9 +46,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'whitenoise',
     'taggit',
-    'cloudinary'
+    'cloudinary',
      
-
 ]
 
 
