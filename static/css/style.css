@@ -36,6 +36,9 @@ li{
 .preloader{
   display: none;
 }
+input {
+  -webkit-appearance: none;
+}
 /* General ENd ------------------*/
 
 /* Header ------------------------------------------ */
@@ -148,8 +151,6 @@ a{
        /*footer  end*/
 
 
-
-
 /* animations */
 
 @keyframes rotate {
@@ -166,6 +167,11 @@ a{
       100%{
           opacity: 1;   
       } 
+  }
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input[type="submit"] {
+      border-radius: 0;
+    }
   }
 @media screen and (max-width:768px) {
     nav{
@@ -209,5 +215,4 @@ a{
       top: 2rem;
       right: 1rem;
     }
-    
 }

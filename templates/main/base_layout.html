@@ -55,9 +55,9 @@
                 {% block content %}
                 {% endblock %}
             </div>
-            <div style="padding: 2rem 1rem; text-align: center;border-top:1px solid  rgba(17, 17, 26, 0.1) ;margin-top: 2rem;">
+            <div style="padding: 2rem 1rem; text-align: center;border-top:1px solid  rgba(17, 17, 26, 0.1) ;margin-top: 2rem;" id="subscribeToNewsletter">
                 <h3 style="font-size: xx-large;">Join Our Weekly Newletter</h3>
-                <p style="text-align: center;margin-block: 1rem; display: none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic ut quis quidem deserunt. Inventore at aliquam eligendi id delectus sit.!</p>
+                <p style="text-align: center;margin-block: 1rem;">Ignite Your Mind with Apjot's Weekly Newsletter: Explore Deep Insights, Thought-Provoking Content, and Exclusive Updates</p>
                 <form action="{% url 'subscribe' %}" method="post" style="display: flex; width: 100%;max-width: 600px; margin: auto;" id="newsletterForm">
                     {% csrf_token %}
                     <input type="email" name="subscribeEmail" id="subscribeEmail" placeholder="Enter email address" style="padding:1rem;width: 100%;font-size: large;" required>
@@ -71,19 +71,19 @@
                   <footer>
                       <div class="social">
                         <a href="https://www.instagram.com/apjot.blog/" target="_blank" > <i class="fa-brands fa-instagram" style="font-size:25px ;"></i> </a>
-                        <a href=" mailto:contact@faidevstudios.com"><i class="fa-regular fa-envelope"  style="font-size:25px ;"></i> </a>
+                        <a href=" mailto:nelsonfai21@yahoo.com"><i class="fa-regular fa-envelope"  style="font-size:25px ;"></i> </a>
                         <a href="tel:015214773540" hidden><i class="fa-solid fa-phone-flip" style="font-size:25px;"></i></a>             </div>
                       <ul class="list-inline">
                           <li class="list-inline-item"><a href="{%url 'homepage' %}">Home</a></li>
                           <li class="list-inline-item"><a href="{%url 'blogHome' %}">Blog</a></li>
                           <li class="list-inline-item"><a href="{%url 'about' %}">About</a></li>
                       </ul>
-                      <p hidden>contact@faidevstudios.com</p>
+                      <p hidden>eamil....</p>
                       <p class="copyright">Apjot© 2023</p>
                   </footer>
               </footer>
 
-        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6341aa238960643d"></script>
 <script>
 function Toggle() {
