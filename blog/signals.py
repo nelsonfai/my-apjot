@@ -1,7 +1,10 @@
+'''
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Articles
 import requests
+
+
 print('IN barca')
 @receiver(post_save, sender=Articles)
 def article_created(sender, instance, created, **kwargs):
@@ -43,3 +46,5 @@ def publish_to_medium(title, content, tags, author_id, access_token):
         print("Response content:", response.content)
 
     return response.json()
+
+'''
