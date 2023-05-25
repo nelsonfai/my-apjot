@@ -19,8 +19,17 @@
         </div>
         <br>
         <br>
-
-        <div class="articleBody"> {{ article.body| safe}} </div>
+        
+        <div style="background-color: lightgray;color:black; padding: 1.3rem; font-weight: bold;">
+            <p>Listen to Article <span id="duration" style="text-decoration: underline;"> </span> minutes </p>
+            <div style="display: flex;gap: 1rem;" class="audioplay">
+                <button type="button" onclick="textToAudio()" id="play" class="playbtn"><i class="fa-solid fa-play"></i></button> 
+                <button type="button" onclick="pauseAudio()" id="pause" class="playbtn"><i class="fa-solid fa-pause"></i></button>
+                <button type="button" onclick="playAudio()" id="resume" class="playbtn"> <img src="{% static 'icons8-resume-button-60.png' %}" alt="" width="20px"></button>  
+                <button type="button" onclick="stopAudio()" id="stop" class="playbtn"><i class="fa-solid fa-stop"></i></button>
+            </div>
+        </div>
+        <div class="articleBody" id="article_Body"> {{ article.body| safe}} </div>
           <form action="{% url 'like_article' courseid=article.slug %}" method="post" id="applaud">
                     {% csrf_token %}
                    <input type="hidden" name="article_id" value="{{ article.id }}" >   
@@ -59,11 +68,7 @@
             {% endif %}
         </p> 
     </div>   
-
 </div>
-
-
-
 
 </div>
 
@@ -169,8 +174,72 @@
                             }
                 })
             }
-      
 </script>
+
+  
+
+  
+  <script>
+    /* JS comes here */
+    let speech = null; // Variable to store the speech synthesis object
+  
+    function textToAudio() {
+      let msg = document.getElementById("article_Body").innerText;
+      speech = new SpeechSynthesisUtterance();
+      speech.lang = "en-US";
+      speech.text = msg;
+      speech.volume = 1;
+      speech.rate = 0.9;
+      speech.pitch = 1;
+      speech.voiceURI = "Google US English Male";
+      document.querySelectorAll('.playbtn').forEach( x => x.style.backgroundColor = "white",x.style.boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px')   
+      document.getElementById('play').style.backgroundColor = "grey";
+      window.speechSynthesis.speak(speech);
+      
+    }
+  
+    function pauseAudio() {
+      if (speech && window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+        document.querySelectorAll('.playbtn').forEach( x => x.style.backgroundColor = "white",x.style.boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px')   
+        document.getElementById('pause').style.backgroundColor = "grey";
+        
+      }
+    }
+  
+    function playAudio() {
+      if (speech && window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+        document.querySelectorAll('.playbtn').forEach( x => x.style.backgroundColor = "white",x.style.boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px')   
+        document.getElementById('resume').style.backgroundColor = "grey";
+
+      } else if (!speech) {
+        textToAudio();
+      }
+    }
+  
+    function stopAudio() {
+      if (speech) {
+        window.speechSynthesis.cancel();
+        document.querySelectorAll('.playbtn').forEach( x => x.style.backgroundColor = "white",x.style.boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px')   
+        document.getElementById('stop').style.backgroundColor = "grey";
+        speech = null;
+      }
+    }
+    function calculateReadingTime() {
+    text = document.getElementById("article_Body").innerText;
+    const wordsPerMinute = 150; // Average words per minute for English
+    const wordCount = text.trim().split(/\s+/).length;
+    const readingTime = wordCount / wordsPerMinute;
+    const minutes = Math.ceil(readingTime);
+    document.getElementById("duration").innerText = minutes
+}
+window.addEventListener("beforeunload", stopAudio);
+window.addEventListener("load", calculateReadingTime);
+
+
+</script>
+  
 <style>
 .articles{
     width:80%;
@@ -260,6 +329,17 @@ q::before{
 }
 .paginationNav div{
     width: 50%;
+}
+.audioplay{
+    margin-top: 1rem;
+    background-color: lightgray;
+}
+.audioplay button{
+border: none;
+background-color: white;
+height: 40px;
+width: 40px;
+border-radius: 50%;
 }
 @media screen and (max-width:768px) {
     .articles{
