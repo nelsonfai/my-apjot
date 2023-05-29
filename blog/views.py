@@ -38,7 +38,7 @@ def bloghome(request):
                 active = category
        else:
             articles=data()  
-       p=Paginator(( articles ),per_page=2)
+       p=Paginator(( articles ),per_page=8)
        page=request.GET.get('page')
        paginated_article=p.get_page(page)
        return render(request, 'blog/index.html',{'paginated_article':paginated_article,'category':categories,'active':active,'page_title':'Blogs : Apjot'

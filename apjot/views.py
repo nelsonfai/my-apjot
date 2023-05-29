@@ -27,13 +27,21 @@ def contact(request):
 
 
 class MySitemap(Sitemap):
-    def items(self):
-        # Return the queryset of objects to include in the sitemap
-        return Articles.objects.all()
-
-    def location(self, obj):
-        # Return the URL for each object in the queryset
+   def location(self, obj):
+    # For dynamic objects
+    if isinstance(obj, Articles):
         return reverse('details', args=[obj.slug])
+    # For static pages
+    elif obj == '':
+        return ''
+    elif obj == 'blog':
+        return '/blog/'
+    elif obj == 'about':
+        return '/about/'
+    
+   def items(self):
+        return [ '','blog', 'about'] + list(Articles.objects.all())
+
 
 sitemaps = {
     'my_sitemap': MySitemap,
