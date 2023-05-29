@@ -26,7 +26,7 @@ import cloudinary.api
 SECRET_KEY = 'django-insecure-as&l9#gl@(wqa%^^h8t25n-+#t8zfa8^ow5cl(js9llayllcay'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['my-apjot-production.up.railway.app','www.apjot.blog','apjot.blog','127.0.0.1']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'whitenoise',
     'taggit',
     'cloudinary',
+    'django.contrib.sitemaps',
      
 ]
 
@@ -162,5 +163,6 @@ cloudinary.config(
   api_secret = "_9nQIB5FdyUGOuyaV8DhvuTWEJQ",
 )
 
+SITE_ID = 1
 
 CSRF_TRUSTED_ORIGINS = ["https://my-apjot-production.up.railway.app","https://www.apjot.blog"]
