@@ -67,7 +67,7 @@ def article_details(request,courseid):
                 prevpost =Articles.objects.filter(publish=True).filter(id__lt=single.id).order_by('id').last()
                 user= request.user
                 comment_form = CommentForm()
-                p=article.comments.all().order_by('-date')[0:5]
+                p=article.comments.all().order_by('date')[0:10]
                 pass_on ={
                     'article':article,
                     'comment_form':comment_form,
