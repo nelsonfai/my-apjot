@@ -4,7 +4,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 def home(request):
-    last_four_articles = Articles.objects.order_by('-id')[:3]
+    last_four_articles = Articles.objects.filter(publish=True).order_by('-id')[:3]
     user =request.user
     context= {
     'user':user,
