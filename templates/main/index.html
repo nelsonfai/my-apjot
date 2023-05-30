@@ -49,11 +49,11 @@
       <br>
       <div class="grid-container" >
           {% for article in articles %}
-            <div class="grid-div {% if forloop.first %}span-two-rows{% endif %}" style="background-image: url('{{article.image.url}}');">
+          
+            <div class="grid-div {% if forloop.first %}span-two-rows{% endif %}" style="background-image: url('{{article.image.url}}');" onclick="window.location.href = '/blog/{{ article.slug }}';">
               <a href="{% url 'details' courseid=article.slug %}" >
                 <div class="grid-text">
-                  <p>Most Recent Post</p>
-                  <p> Article:{{article.title}}</p>
+                  <h3 style="font-size: 1.3rem;"> {{article.title}}</h3>
                 </div>
               </a>
             </div>

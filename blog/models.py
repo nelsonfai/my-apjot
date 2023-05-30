@@ -33,6 +33,7 @@ class Articles (models.Model):
     category = models.CharField(max_length=200, choices=CATEGORY_CHOICES)
     password_required = models.BooleanField(default=False)
     post_medium = models.BooleanField(default=False)
+    featured_order = models.IntegerField(null=True ,blank=True)
     tags = TaggableManager()
 
     def __str__(self):
