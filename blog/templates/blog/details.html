@@ -1,7 +1,12 @@
 {% extends 'main/base_layout.html' %}
 {% block content %}
 {%load static%}
-
+{% block meta_description %}
+<meta name="description" content="{{ article.meta_description }}">
+{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="{{ article.meta_keywords }}">
+{% endblock %}
 <article class="articles">
     <div class="article">
         <h1 id="title"> <a href="{% url 'details' courseid=article.slug %}"> {{ article.title }}  </a> </h1>

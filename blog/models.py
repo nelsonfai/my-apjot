@@ -34,6 +34,8 @@ class Articles (models.Model):
     password_required = models.BooleanField(default=False)
     post_medium = models.BooleanField(default=False)
     featured_order = models.IntegerField(null=True ,blank=True)
+    meta_description = models.TextField( null=True,blank=True)
+    meta_keywords = models.CharField(max_length=500, null=True,blank=True)
     tags = TaggableManager()
 
     def __str__(self):
