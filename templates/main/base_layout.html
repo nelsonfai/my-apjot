@@ -71,13 +71,14 @@
                 {% block content %}
                 {% endblock %}
             </div>
+
             <div style="padding: 2rem 1rem; text-align: center;border-top:1px solid  rgba(17, 17, 26, 0.1) ;margin-top: 2rem;" id="subscribeToNewsletter">
                 <h3 style="font-size: xx-large;">Join Our Weekly Newletter</h3>
                 <p style="text-align: center;margin-block: 1rem;">Ignite Your Mind with Apjot's Weekly Newsletter: Explore Deep Insights, Thought-Provoking Content, and Exclusive Updates</p>
                 <form action="{% url 'subscribe' %}" method="post" style="display: flex; width: 100%;max-width: 600px; margin: auto;" id="newsletterForm">
-                    {% csrf_token %}
+                    
                     <input type="email" name="subscribeEmail" id="subscribeEmail" placeholder="Enter email address" style="padding:1rem;width: 100%;font-size: large;" required>
-                    <input type="text" value="{{csrf_token}}" name="token" id="token" hidden readonly>
+                    <input type="text" value="{{csrf_token}}" name="token" id="token" hidden>
                     <input type="submit" value="Subscribe" style="padding: 1rem; background-color: black;color: white;">
                 </form>
                 <p style="text-align: center;margin-top: 1rem;" id="successMessage" ></p>
@@ -152,6 +153,9 @@ $(document).ready(function() {
         });
     });
 });
+
+
+
 </script>
 </body>
 </html>

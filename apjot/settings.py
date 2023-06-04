@@ -166,3 +166,6 @@ cloudinary.config(
 SITE_ID = 1
 
 CSRF_TRUSTED_ORIGINS = ["https://my-apjot-production.up.railway.app","https://www.apjot.blog"]
+
+MAILCHIMP_API_KEY = '5f709f4ba23582f5458fe4a51571e383-us21'
+MAILCHIMP_LIST_ID = '09d749aa99'

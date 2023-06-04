@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import  JsonResponse
 from .models import NewsletterEmail
+from mailchimp3 import MailChimp
 
 #Shared view data
 def data():
@@ -156,6 +157,16 @@ def subscribe(request):
                         return JsonResponse({'message': 'You are already registered to Newsletter'})
                     else:
                         NewsletterEmail.objects.create(email=email)
+                        client = MailChimp(mc_api=settings.MAILCHIMP_API_KEY)
+
+                        # Add the user's email to the Mailchimp list
+                        client.lists.members.create(
+                            settings.MAILCHIMP_LIST_ID,
+                            {
+                                'email_address': email,
+                                'status': 'subscribed'
+                            }
+                        )
                         return JsonResponse({'message': 'Email added  successfully!'})
 
 
