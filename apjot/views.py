@@ -2,6 +2,7 @@ from django.shortcuts import render
 from blog.models import Articles
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
+from django.http import HttpResponse
 
 def home(request):
     last_four_articles = Articles.objects.filter(publish=True).order_by('featured_order')[:3]
@@ -46,3 +47,6 @@ class MySitemap(Sitemap):
 sitemaps = {
     'my_sitemap': MySitemap,
 }
+def robots_txt(request):
+    content = "User-agent: *\nDisallow: /admin/"
+    return HttpResponse(content, content_type="text/plain")

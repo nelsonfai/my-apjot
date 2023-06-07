@@ -30,7 +30,7 @@
             <div style="display: flex;gap: 1rem;" class="audioplay">
                 <button type="button" onclick="textToAudio()" id="play" class="playbtn"><i class="fa-solid fa-play"></i></button> 
                 <button type="button" onclick="pauseAudio()" id="pause" class="playbtn"><i class="fa-solid fa-pause"></i></button>
-                <button type="button" onclick="playAudio()" id="resume" class="playbtn"> <img src="{% static 'icons8-resume-button-60.png' %}" alt="" width="20px"></button>  
+                <button type="button" onclick="playAudio()" id="resume" class="playbtn"> <img src="{% static 'icons8-resume-button-60.png' %}" alt="resume -button" width="20px"></button>  
                 <button type="button" onclick="stopAudio()" id="stop" class="playbtn"><i class="fa-solid fa-stop"></i></button>
             </div>
         </div>
@@ -38,7 +38,7 @@
           <form action="{% url 'like_article' courseid=article.slug %}" method="post" id="applaud">
                     {% csrf_token %}
                    <input type="hidden" name="article_id" value="{{ article.id }}" >   
-                 <button type="submit"  style="background:transparent; border:none; font-size:1.3rem;margin-block: 20px; font-weight: thin;"> <img src="{% static 'like (1).gif' %}" alt="like" width="40px" style="top: 10px; position:relative; cursor: pointer;"> </button> <span id="applaudcount" style="font-size:1.4rem;">{{article.applaud}}</span>
+                 <button type="submit"  style="background:transparent; border:none; font-size:1.3rem;margin-block: 20px; font-weight: thin;"> <img src="{% static 'like (1).gif' %}" alt="like-button" width="40px" style="top: 10px; position:relative; cursor: pointer;"> </button> <span id="applaudcount" style="font-size:1.4rem;">{{article.applaud}}</span>
                 </form>
         <br>
                 
@@ -146,7 +146,7 @@
                     },
                 success:function(data){
                     
-                commenter.innerHTML =`<p id="comment_name"><img src="../media/profile-user.png" alt="profile" class="user" > 
+                commenter.innerHTML =`<p id="comment_name"><img src="../media/profile-user.png" alt="profile image" class="user" > 
                                         ${data.name}                  
                                         </p> 
                                         <p class="comment_date"> now </p> 
