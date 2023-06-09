@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 from cloudinary.models import CloudinaryField
-
+from user.models import CustomUser
 class Category(models.Model):
     name = models.CharField(max_length=255)
     def __str__ (self):
@@ -17,6 +17,7 @@ class Articles (models.Model):
         ('scc', 'Social and Cultural commentary'),
         ('ins', 'Inspirational stories'),
         ('mwb', 'Mindfulness and Well being'),
+        ('bks','Book Reviews'),
     )
     title = models.CharField( max_length=100)
     body = RichTextField( blank=True, null=True)
@@ -25,7 +26,7 @@ class Articles (models.Model):
     #image = models.FileField()
     image = CloudinaryField('image')
 
-    likes =models.ManyToManyField(User, default=None,blank=True, related_name='liked')
+    likes =models.ManyToManyField(CustomUser, default=None,blank=True, related_name='liked')
     tagline=models.CharField(max_length=100 ,blank=True,null=True)
     views = models.IntegerField(default=0)
     applaud = models.IntegerField(default=0)
@@ -54,7 +55,7 @@ class Comments (models.Model):
     comment= models.TextField()
     date= models.DateTimeField(auto_now=True)
     
-    author =models.ForeignKey(User,on_delete= models.CASCADE,default=1) 
+    author =models.ForeignKey(CustomUser,on_delete= models.CASCADE,default=1) 
     
 
     def __str__(self):
@@ -64,7 +65,7 @@ LIKE_CHOICES=(
     ('Like','Like'), ('Unlike','Unlike'))
 
 class Like(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     article=models.ForeignKey(Articles,on_delete=models.CASCADE)
     value =models.CharField(choices =LIKE_CHOICES, default='Like', max_length=10)
    
@@ -84,3 +85,8 @@ class NewsletterEmail(models.Model):
 
     def __str__(self):
         return self.email
+
+class Highlights(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=False,blank=False,related_name='my_highlights')
+    article = models.ForeignKey(Articles, on_delete=models.CASCADE,null=False,blank=False,related_name='highlighted_article')
+    text = models.TextField(blank=False,null=True)

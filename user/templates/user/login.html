@@ -1,144 +1,106 @@
-
-
-
-{% load static %}
+{%  load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Kdam+Thmor+Pro&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <title>Apjot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    {% if not article %}
+    <meta name="keywords" content=" Apjot, public journal of thoughts, blog, podcast, profound insights, diverse perspectives, thought-provoking discussions, vibrant community, elevate your thinking, self-reflection, personal growth, intellectual curiosity,mindfulness,anxiety" />
+    <meta name="description" content="Apjot: Reflect, Explore, Grow. Dive into thought-provoking writings, celebrate diverse ideas, and embark on a journey of personal growth. Philosophy, personal development, science, art, and social commentary await.
+    Welcome to Apjot, a captivating platform empowering reflection and intellectual exploration. Immerse yourself in curated thought-provoking writings where diverse ideas flourish, nurturing personal growth.
+    Unravel existential questions and profound concepts through philosophy, broadening your understanding of the world. Discover practical strategies for personal development, enhancing well-being, productivity, and mindset.
+    Journey through the realms of science and art, exploring cutting-edge discoveries and creative expressions that expand perspectives. Engage with social commentary, exploring current issues and cultural phenomena, gaining insights from diverse perspectives.
+    Join our vibrant community of thinkers, visionaries, and learners. Forge meaningful connections, participate in engaging conversations, and inspire positive change.
+    Embark on a transformative journey of self-discovery and intellectual curiosity. Embrace reflection, challenge assumptions, and expand intellectual horizons.
+    Apjot invites you to reflect, explore, and grow. Celebrate the power of diverse ideas, ignite personal growth, and embrace the endless possibilities that await.
+    Join Apjot today and dive into the enriching world of thought." >
+    {% endif %}
+    <title>LogIn - Apjot </title> 
+
+    <script src="https://kit.fontawesome.com/6077df5cfa.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %} ">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %} ">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <meta name="google-site-verification" content="p5XcBktjilXA5448kBtIbZJoencT98CIc7ReMZBsDgU" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD9785G3ET"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-SD9785G3ET');
+    </script>
+
 </head>
 <body>
-
-    
-
-    <div class="container">
-        
-		<h1 id="pagehead"> login <br><img src="/static/avatar.svg" width ='20%' id="avatar"></h1>
 		<div class="login-content">
+            <h1>  <span style="border-bottom: 2px solid black; padding-bottom: 0.8rem; "> <a href=" {% url 'login'%}">Login </a> </span><span style="opacity: 0.6;"> <a href=" {% url 'signup'%}"> Sign Up</a></span> </h1>
 			<form action="{% url 'login'%}" class="site-form" method="post">
-                {%csrf_token%}
-				
-				
-                <div class="input-div one">
-                   
-           		   <div class="div">
-           		   		<h5><span><img src="https://img.icons8.com/ios-glyphs/15/undefined/user--v1.png"  /> </span>{{ form.username.label }} </h5>
-                        {{ form.username}}
-           		   		
-           		   </div>
-                      
-           		
-           		   <div class="div">
-           		    	
-                        <h5> <span> <img src="https://img.icons8.com/material-rounded/14/undefined/password.png"/></span>{{form.password.label }}</h5>
-           		    	{{ form.password }}
-            	   </div>
-<br>
-<br>
-                   
-            	</div>
-            	
-               
-
-            	<p> <input type="submit" class="btnsubmit" value="LogIn" > <a href="{% url 'signup'%}"  class="btnsubmit"  style="font-size: 10px ;"> SignUp</a></p>
+                {%csrf_token%} 
+           		   		<p>{{ form.email.label }} </p>
+                       <p> {{ form.email}}</p> 
+           		   
+                        <p>{{form.password.label }}</p>
+           		        <p>{{ form.password }} </p>
+                <button type="submit" class="btnsubmit"> Log In</button>
             </form>
      
-            <div class="errors"  style="color:red ; font-size: 14px; margin-left: -8%; width: 90%;"><p > {{ form.errors }} </p> </div>   </div>
+            <div class="errors"  style="color:red ; font-size: 14px; padding-inline: 1rem;"><p > {{ form.errors }} </p> </div>   </div>
    
+        </div>
 
 
+<style>
+            h1{
+                font-family: 'Times New Roman', Times, serif;
+                font-weight: 400;
+                margin-bottom: 3rem;
+                font-size: 1.7rem;
 
-<style> 
+            }
+            .login-content{
+                max-width: 800px;
+                max-height: 100vh;
+                margin: auto;
+                margin-top: 10%;
+                padding: 1rem;
+            }
+            form,input{
+                width: 100%;
+                padding: 1rem;
+                margin-block: 1rem;
+            }
+            form{
+                padding: 0;
+            }
+    .btnsubmit{
+    width: 100%;
+        color: white ; 
+        padding:0.6em 2em;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border: 1.5px solid black;
+        background-color: black;
+    }
+    .btnsubmit:hover {
+      color: black;
+      background-color: whitesmoke;
+      transition-duration: 1s;
 
-.container{
-    font-family: 'Open Sans', sans-serif;
-    width:25%;
-    border-radius:8px;
-
-    margin:auto;
-    margin-top: 5%;
-   box-shadow: 1px -0px  1px 2px  rgba(0, 0, 0, .2);
-   padding:0.5% 0% 3% 0%
-
-
-}
-
-    
-
-.login-content{
-    width:30%;
-    margin: auto;
-}
-
-.btnsubmit{
-    display: block;
-    margin: auto;
-   
-   background-color: white; 
- color: #F9A826; 
- border: 2px solid #F9A826;
- 
- font-size  :12px; 
- padding: 2% 3%;
- text-align: center;
- text-decoration: none;
- display: inline-block;
- 
- margin: 4px 2px;
- transition-duration: 0.4s;
- cursor: pointer;
- 
- 
- 
-}
-.btnsubmit:hover {
- background-color: #F9A826;
- color: white;
- transition-duration: 1s;
-}
-#pagehead{
-    text-align: center;
-    font-family: 'Kdam Thmor Pro', sans-serif;
-    
-}
-@media  screen and (max-width: 900px) {
-.container{
-    width:90%;
-
-    
-}
-
-    
-}
-.login-content{
-    width:50%;
-    margin-left: 20%;
-    
-    
-}
-.login-content #avatar {
-    margin-left: 15%;
-}
-
-
-.field{
-    font-family: 'Open Sans', sans-serif;
-    padding: 5px;
-    border-radius: 5px;
-    
-   
-}
-@media  screen and (max-width: 500px) {
-.container{
-    width:100%;
-    
-}
-}
-
+    }
 </style>
 </body>
 </html>

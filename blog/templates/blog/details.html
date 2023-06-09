@@ -35,6 +35,14 @@
             </div>
         </div>
         <div class="articleBody" id="article_Body"> {{ article.body| safe}} </div>
+        <div class=" highlightButton">
+            {% if request.user.is_authenticated %}
+            <button id="highlightButton" class="yellow"> <i class="fa-solid fa-highlighter"></i></button>
+            {%else%}
+            <button class="yellow" onclick="alert('You must be logged in to use the highlight feature.Once logged in select a text area ,then clik the highlight button')"> <i class="fa-solid fa-highlighter"></i></button>
+            {%endif%}
+
+        </div>
           <form action="{% url 'like_article' courseid=article.slug %}" method="post" id="applaud">
                     {% csrf_token %}
                    <input type="hidden" name="article_id" value="{{ article.id }}" >   
@@ -134,7 +142,6 @@
           
           let commenter = document.createElement('div')
           
-          
           $.ajax({
                 type: "POST",
                 url: "{% url 'details'   courseid=article.slug  %}",
@@ -180,10 +187,6 @@
                 })
             }
 </script>
-
-  
-
-  
   <script>
     /* JS comes here */
     let speech = null; // Variable to store the speech synthesis object
@@ -246,6 +249,70 @@ window.addEventListener("load", calculateReadingTime);
 </script>
   
 
+<script>
+function highlightTexts() {
+  const articleBody = document.querySelector('.articleBody');
+  const textsToHighlight = {{highlights|safe}};
+  textsToHighlight.forEach(text => {
+    const regex = new RegExp(text, 'gi');
+    const matches = articleBody.innerHTML.match(regex);
+    if (matches) {
+      articleBody.innerHTML = articleBody.innerHTML.replace(regex, `<span class="highlighted yellow">${text}</span>`);
+    }
+  });
+}
+highlightTexts();
+
+// ADD A HIGHLIGHT
+const highlightButton = document.getElementById('highlightButton');
+highlightButton.addEventListener('click', highlightSelection);
+
+function highlightSelection() {
+  const selectedText = window.getSelection().toString();
+  if (selectedText.trim() === '') {
+  
+    return; // Return if the selected text is empty
+  }
+
+  const span = document.createElement('span');
+  span.className = 'yellow';
+  span.textContent = selectedText;
+  const range = window.getSelection().getRangeAt(0);
+  range.surroundContents(span);
+
+  const articleId = {{article.id}}; // Replace with the actual article ID
+  const text = selectedText;
+
+  const csrfToken = $('[name=csrfmiddlewaretoken]').val();
+  const highlightURL = "{% url 'highlight' %}"; // Replace 'highlight' with your actual URL name
+
+  // Send AJAX request
+  $.ajax({
+    url: highlightURL,
+    type: 'GET',
+    data: {
+      article_id: articleId,
+      text: text
+    },
+    headers: {
+      'X-CSRFToken': csrfToken
+    },
+    success: function (response) {
+      // Update the code or perform any other actions for a successful highlight creation
+      const highlightId = response.highlight_id;
+      const message = response.message;
+      console.log(`Highlight created with ID: ${highlightId}`);
+      console.log(message);
+    },
+    error: function () {
+      // Remove the highlight if the highlight creation was not successful
+      span.outerHTML = selectedText;
+      console.error('Highlight creation failed.');
+    }
+  });
+}
+
+</script>
 
 <style>
 .articles{
@@ -255,6 +322,7 @@ window.addEventListener("load", calculateReadingTime);
     padding: 1rem;
     padding-top: 2%;
     max-width: 900px;
+    position: relative;
 }
 .comment{
     width: 100%;
@@ -355,6 +423,32 @@ width: 40px;
 border-radius: 50%;
 color: black;
 }
+.highlighted {
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  transition: background-size .5s;
+}
+
+.highlighted,.yellow {
+  background-image: linear-gradient(to top, yellow 65%, transparent 0);
+}
+.highlightButton{
+    position: fixed;
+    bottom: 3rem;
+    right: 10%; 
+    background-color: transparent;
+}
+.highlightButton button{
+    padding: 1rem;
+    border-radius: 50%;
+    border: 1px solid  white;
+
+}
+.highlightButton i{
+    font-size: 1.2rem;
+}
+
 @media screen and (max-width:768px) {
     .articles{
     width:100%;
@@ -369,6 +463,11 @@ color: black;
 }
 .paginationNav{
     font-size: small;
+}
+.highlightButton{
+
+    bottom: 3rem;
+    right: 5%; 
 }
 }
 </style>

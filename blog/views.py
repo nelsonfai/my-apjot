@@ -14,7 +14,7 @@ from django.conf import settings
 from django.http import  JsonResponse
 from .models import NewsletterEmail
 from mailchimp3 import MailChimp
-
+from .models import Highlights
 #Shared view data
 def data():
     global articles_list
@@ -28,7 +28,9 @@ def bloghome(request):
     'pdg': 'Personal development and growth',
     'scc': 'Social and Cultural commentary',
     'ins': 'Inspirational stories',
-    'mwb': 'Mindfulness and Well being'
+    'mwb': 'Mindfulness and Well being',
+    'bks':'Book Reviews',
+
 }
        active = 'All'
        if category:
@@ -60,6 +62,16 @@ def article_details(request,courseid):
             else:
                 return JsonResponse({'status':'form not submitted'})
         else:
+                if request.user.is_authenticated:
+                    
+                    highlight_texts = Highlights.objects.filter(user_id=request.user, article=article).values_list('text', flat=True)
+                    if highlight_texts:
+                        highlight_texts_array = list(highlight_texts)
+                    else:
+                         highlight_texts_array = [] 
+                else:
+                     highlight_texts_array = []       
+                print(highlight_texts_array)
                 articles= data()[1:5]
                 article.views +=1
                 article.save()
@@ -77,7 +89,9 @@ def article_details(request,courseid):
                     'nextpost':nextpost,
                     'articles':articles,
                     'p':p ,
-                    'page_title':f'Apjot: {article.title}'
+                    'page_title':f'Apjot: {article.title}',
+
+                    'highlights':highlight_texts_array
  
                 }
         return render(request, 'blog/details.html',pass_on)
@@ -172,3 +186,22 @@ def subscribe(request):
 
     return JsonResponse({'error':'Opps something went wrong .Please try again!'})
 
+def highlight(request):
+    user = request.user
+    article_id = request.GET.get('article_id')
+    text = request.GET.get('text')
+
+    article = get_object_or_404(Articles, id=article_id)
+
+    highlight = Highlights.objects.create(user=user, article=article, text=text)
+
+    # Construct the response data
+    response_data = {
+        'success': True,
+        'highlight_id': highlight.id,
+        'message': 'Highlight created successfully.',
+    }
+
+    # Return the JSON response
+    print('Higl view')
+    return JsonResponse(response_data)

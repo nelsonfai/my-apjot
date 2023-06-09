@@ -1,7 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
-
+from user.models import CustomUser
 
 
 # Create your models here.
@@ -20,7 +20,7 @@ class Episodes(models.Model):
     slug = models.SlugField()
     date =models.DateTimeField(auto_now_add=True)
     image = models.FileField()
-    likes =models.ManyToManyField(User, default=None,blank=True, related_name='podliked')
+    likes =models.ManyToManyField(CustomUser, default=None,blank=True, related_name='podliked')
     spotifylink=models.CharField(max_length=200 ,default='1jQnF8PfdpYKo9Jguhinlc')
     
     def __str__(self):
@@ -36,10 +36,8 @@ class Podcomments (models.Model):
     episode= models.ForeignKey(Episodes, related_name='podcomments' ,on_delete= models.CASCADE)
     comment= models.TextField()
     date= models.DateTimeField(auto_now=True)
-    author=models.ForeignKey(User, related_name='podcomment_author' ,on_delete= models.CASCADE,default=1)
+    author=models.ForeignKey(CustomUser, related_name='podcomment_author' ,on_delete= models.CASCADE,default=1)
    
-
-
     def __str__(self):
         return f'{self.author.username} commented on {self.episode.title}' 
 
@@ -50,7 +48,7 @@ LIKE_CHOICES=(
     ('Like','Like'), ('Unlike','Unlike'))
 
 class PodLike(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     episode=models.ForeignKey(Episodes,on_delete=models.CASCADE)
     value =models.CharField(choices =LIKE_CHOICES, default='Like', max_length=10)
     

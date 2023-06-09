@@ -26,7 +26,7 @@ import cloudinary.api
 SECRET_KEY = 'django-insecure-as&l9#gl@(wqa%^^h8t25n-+#t8zfa8^ow5cl(js9llayllcay'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['my-apjot-production.up.railway.app','www.apjot.blog','apjot.blog','127.0.0.1']
 
@@ -76,10 +76,16 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+
             ],
         },
     },
 ]
+
+
+
+
 
 WSGI_APPLICATION = 'apjot.wsgi.application'
 
@@ -106,6 +112,7 @@ DATABASES = {
         }
 }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -124,6 +131,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'user.CustomUser'
+
+
+AUTHENTICATION_BACKENDS = [
+    'user.backends.EmailOrPhoneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+#ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
