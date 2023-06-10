@@ -91,7 +91,8 @@ def article_details(request,courseid):
                     'p':p ,
                     'page_title':f'Apjot: {article.title}',
 
-                    'highlights':highlight_texts_array
+                    'highlights':highlight_texts_array,
+                    'no_cokkies':True,
  
                 }
         return render(request, 'blog/details.html',pass_on)
