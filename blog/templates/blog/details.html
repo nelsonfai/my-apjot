@@ -266,8 +266,10 @@ highlightTexts();
 // ADD A HIGHLIGHT
 const highlightButton = document.getElementById('highlightButton');
 highlightButton.addEventListener('click', highlightSelection);
+highlightButton.addEventListener('touchstart', highlightSelection); // Add touchstart event
 
 function highlightSelection() {
+  event.preventDefault(); // Prevent default behavior for touch events
   const selectedText = window.getSelection().toString();
   if (selectedText.trim() === '') {
   
@@ -447,6 +449,7 @@ color: black;
 }
 .highlightButton i{
     font-size: 1.2rem;
+    color: black;
 }
 
 @media screen and (max-width:768px) {
