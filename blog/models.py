@@ -22,11 +22,11 @@ class Articles (models.Model):
     title = models.CharField( max_length=100)
     body = RichTextField( blank=True, null=True)
     slug = models.SlugField()
-    date =models.DateTimeField(auto_now_add=True)
+    date =models.DateTimeField()
     #image = models.FileField()
     image = CloudinaryField('image')
 
-    likes =models.ManyToManyField(CustomUser, default=None,blank=True, related_name='liked')
+    #likes =models.ManyToManyField(CustomUser, default=None,blank=True, related_name='liked')
     tagline=models.CharField(max_length=100 ,blank=True,null=True)
     views = models.IntegerField(default=0)
     applaud = models.IntegerField(default=0)
