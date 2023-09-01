@@ -20,9 +20,9 @@
 </div>
 
         <div>
-            <form action="{% url 'search' %}"  style="display: flex; width: 100%;max-width: 850px; margin: auto; padding: .6rem;margin-block: 1rem;" >
-                <input type="text" name="searchterm" id="" placeholder="search Blog item" style="padding:.6rem;width: 100%;font-size: large;">
-                <input type="submit" value="search" style="padding: .6rem; background-color: rgba(0, 0, 0, 0.865);color: white;">
+            <form action="{% url 'search' %}"  style="display: flex; width: 100%; margin: auto; padding: .6rem;margin-block: 1rem;" >
+                <input type="text" name="searchterm" id="" placeholder="search Blog item" style="padding:.6rem;width: 100%;font-size: large;border:1px solid grey">
+                <input type="submit" value="search" style="padding: .6rem; background-color: rgba(0, 0, 0, 0.865);color: white;border:none">
             </form>
         </div>
         {% if paginated_article %}
