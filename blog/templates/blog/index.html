@@ -43,9 +43,6 @@
                     </div>
                     <div class="article_element" >
                         <h2><a href="{% url 'details' courseid=article.slug %}" style="font-weight: 200;"> {{article.title|title}}</a></h2>
-                        <p style="color: grey;"> {{ article.tagline }} </p>
-                        <p> {{ article.snippet|safe}}  </p>
-                        <br>
                         <a href="{% url 'details' courseid=article.slug %}"> <button id="readmore">Read More</button> </a> <br>
                     </div>      
                 </article>
@@ -79,7 +76,7 @@
     color: white;
 }
     h2{
-    font-size: calc(2rem);
+    font-size: calc(1.5rem);
     margin-bottom: 5px;
     font-family: Times, serif;
 }
@@ -110,14 +107,17 @@
         font-size: 1.1rem;   
         margin-bottom: 1rem;
         width: 400px;
-        height: 600px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     }
     article p{
         line-height: 1.6rem;
     }
     .article_element{
-        padding:1rem
+        padding:1rem;
+        height: 275px;
+            display:flex;
+            justify-content:space-between;
+            flex-direction:column
     }
     .article_image{
         width:100%;
